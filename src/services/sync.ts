@@ -49,7 +49,7 @@ export class SyncService {
 	 */
 	stopPeriodicSync(): void {
 		if (this.syncIntervalId !== null) {
-			clearInterval(this.syncIntervalId);
+			activeWindow.clearInterval(this.syncIntervalId);
 			this.syncIntervalId = null;
 		}
 	}

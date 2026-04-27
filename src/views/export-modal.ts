@@ -23,7 +23,7 @@ export class ExportModal extends Modal {
 		const { contentEl } = this;
 		contentEl.addClass("speaknotes-export-modal");
 
-		contentEl.createEl("h2", { text: "Export to SpeakNotes" });
+		contentEl.createEl("h2", { text: "Export to cloud" });
 
 		if (this.editor) {
 			this.renderTextExport(contentEl);
@@ -46,7 +46,7 @@ export class ExportModal extends Modal {
 		// Preview
 		const previewContainer = container.createDiv("speaknotes-export-preview");
 		previewContainer.createEl("h4", { text: "Content preview" });
-		const preview = previewContainer.createEl("div", {
+		const preview = previewContainer.createDiv({
 			cls: "speaknotes-export-preview-content",
 		});
 
@@ -83,11 +83,11 @@ export class ExportModal extends Modal {
 		const actions = container.createDiv("speaknotes-export-actions");
 
 		const exportBtn = actions.createEl("button", {
-			text: "Export to SpeakNotes",
+			text: "Export to cloud",
 			cls: "mod-cta",
 		});
-		exportBtn.onclick = async () => {
-			await this.handleTextExport();
+		exportBtn.onclick = () => {
+			this.handleTextExport();
 		};
 
 		const cancelBtn = actions.createEl("button", {
@@ -108,18 +108,18 @@ export class ExportModal extends Modal {
 			});
 		} else {
 			container.createEl("p", {
-				text: "This file type is not supported for SpeakNotes processing.",
+				text: "This file type is not supported.",
 			});
 			return;
 		}
 
 		// File info
 		const fileInfo = container.createDiv("speaknotes-file-info");
-		fileInfo.createEl("div", {
+		fileInfo.createDiv({
 			text: `File: ${this.file.name}`,
 			cls: "speaknotes-file-name",
 		});
-		fileInfo.createEl("div", {
+		fileInfo.createDiv({
 			text: `Size: ${this.formatFileSize(this.file.stat.size)}`,
 			cls: "speaknotes-file-size",
 		});
@@ -154,7 +154,7 @@ export class ExportModal extends Modal {
 		const actions = container.createDiv("speaknotes-export-actions");
 
 		const exportBtn = actions.createEl("button", {
-			text: "Transcribe with SpeakNotes",
+			text: "Transcribe audio",
 			cls: "mod-cta",
 		});
 		exportBtn.onclick = async () => {
@@ -184,8 +184,8 @@ export class ExportModal extends Modal {
 		// Show processing state
 		this.contentEl.empty();
 		const processingEl = this.contentEl.createDiv("speaknotes-processing");
-		processingEl.createEl("div", { cls: "speaknotes-spinner" });
-		processingEl.createEl("div", { text: "Sending to SpeakNotes..." });
+		processingEl.createDiv({ cls: "speaknotes-spinner" });
+		processingEl.createDiv({ text: "Sending..." });
 
 		// Text export is not yet fully implemented
 		new Notice("Text export is not yet fully implemented. Please use the web app.");
@@ -196,15 +196,15 @@ export class ExportModal extends Modal {
 		// Show processing state
 		this.contentEl.empty();
 		const processingEl = this.contentEl.createDiv("speaknotes-processing");
-		processingEl.createEl("div", { cls: "speaknotes-spinner" });
-		const statusEl = processingEl.createEl("div", { text: "Reading file..." });
+		processingEl.createDiv({ cls: "speaknotes-spinner" });
+		const statusEl = processingEl.createDiv({ text: "Reading file..." });
 
 		try {
 			// Read file from vault
 			const arrayBuffer = await this.app.vault.readBinary(file);
 			const blob = new Blob([arrayBuffer], { type: this.getMimeType(file) });
 
-			statusEl.textContent = "Uploading to SpeakNotes...";
+			statusEl.textContent = "Uploading...";
 
 			// Upload based on file type
 			let result;
@@ -256,7 +256,7 @@ export class ExportModal extends Modal {
 				}
 
 				statusEl.textContent = `Status: ${note.status}...`;
-				await new Promise((resolve) => setTimeout(resolve, 2000));
+				await new Promise((resolve) => activeWindow.setTimeout(resolve, 2000));
 			}
 
 			throw new Error("Timeout waiting for transcription");

@@ -51,7 +51,7 @@ export default class SpeakNotesPlugin extends Plugin {
 		this.registerView(VIEW_TYPE_SIDEBAR, (leaf) => new SidebarView(leaf, this));
 
 		// Add ribbon icon
-		this.addRibbonIcon("microphone", "SpeakNotes", () => {
+		this.addRibbonIcon("microphone", "Record voice memo", () => {
 			new RecorderModal(this.app, this).open();
 		});
 
@@ -120,7 +120,7 @@ export default class SpeakNotesPlugin extends Plugin {
 				if (file instanceof TFile && this.isAudioFile(file)) {
 					menu.addItem((item) => {
 						item
-							.setTitle("Transcribe with SpeakNotes")
+							.setTitle("Transcribe audio")
 							.setIcon("microphone")
 							.onClick(() => {
 								new ExportModal(this.app, this, undefined, file).open();
@@ -182,7 +182,8 @@ export default class SpeakNotesPlugin extends Plugin {
 	}
 
 	async loadSettings(): Promise<void> {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+		const data = (await this.loadData()) as Partial<SpeakNotesSettings> | null;
+		this.settings = Object.assign({}, DEFAULT_SETTINGS, data ?? {});
 	}
 
 	async saveSettings(): Promise<void> {
@@ -208,7 +209,7 @@ export default class SpeakNotesPlugin extends Plugin {
 		}
 
 		if (leaf) {
-			workspace.revealLeaf(leaf);
+			await workspace.revealLeaf(leaf);
 		}
 	}
 
@@ -223,8 +224,8 @@ export default class SpeakNotesPlugin extends Plugin {
 			container.createEl("p", { text: note.summary });
 
 			const meta = container.createDiv({ cls: "speaknotes-embed-meta" });
-			meta.createEl("span", { text: `Type: ${note.type}` });
-			meta.createEl("span", {
+			meta.createSpan({ text: `Type: ${note.type}` });
+			meta.createSpan({
 				text: ` | Created: ${new Date(note.dateCreated).toLocaleDateString()}`,
 			});
 		} catch {

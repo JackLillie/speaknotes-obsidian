@@ -94,7 +94,7 @@ export class BulkExportModal extends Modal {
 		// Status filter
 		new Setting(filtersEl).setName("Filter by status").addDropdown((dropdown) => {
 			dropdown.addOption("Done", "Completed");
-			dropdown.addOption("", "All Statuses");
+			dropdown.addOption("", "All statuses");
 			dropdown.setValue(this.filterStatus);
 			dropdown.onChange(async (value) => {
 				this.filterStatus = value;
@@ -149,7 +149,7 @@ export class BulkExportModal extends Modal {
 		// Selection count and export button
 		const actionsEl = contentEl.createDiv("speaknotes-bulk-actions");
 
-		actionsEl.createEl("span", {
+		actionsEl.createSpan({
 			cls: "speaknotes-selection-count",
 			text: `${this.selectedNotes.size} summaries selected`,
 		});
@@ -189,24 +189,24 @@ export class BulkExportModal extends Modal {
 			attr: { for: `note-${note.id}` },
 		});
 
-		labelEl.createEl("span", {
+		labelEl.createSpan({
 			cls: "speaknotes-bulk-item-title",
 			text: note.title,
 		});
 
-		const metaEl = labelEl.createEl("span", {
+		const metaEl = labelEl.createSpan({
 			cls: "speaknotes-bulk-item-meta",
 		});
-		metaEl.createEl("span", { text: note.type });
-		metaEl.createEl("span", { text: " • " });
-		metaEl.createEl("span", {
+		metaEl.createSpan({ text: note.type });
+		metaEl.createSpan({ text: " • " });
+		metaEl.createSpan({
 			text: new Date(note.dateCreated).toLocaleDateString(),
 		});
 
 		// Check if already exported
 		const existingFile = this.checkIfExported(note);
 		if (existingFile) {
-			itemEl.createEl("span", {
+			itemEl.createSpan({
 				cls: "speaknotes-bulk-item-exists",
 				text: "Already in vault",
 			});

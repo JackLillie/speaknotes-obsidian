@@ -53,10 +53,10 @@ export class SettingsTab extends PluginSettingTab {
 			// Not connected state
 			new Setting(containerEl)
 				.setName("Connect account")
-				.setDesc("Sign in with your SpeakNotes account to sync notes")
+				.setDesc("Sign in to sync notes")
 				.addButton((btn) =>
 					btn
-						.setButtonText("Log in with SpeakNotes")
+						.setButtonText("Log in")
 						.setCta()
 						.onClick(() => this.initiateLogin())
 				);
@@ -67,10 +67,10 @@ export class SettingsTab extends PluginSettingTab {
 		// Export folder
 		new Setting(containerEl)
 			.setName("Export folder")
-			.setDesc("Folder in your vault where SpeakNotes will be saved")
+			.setDesc("Folder in your vault where summaries will be saved")
 			.addText((text) =>
 				text
-					.setPlaceholder("SpeakNotes")
+					.setPlaceholder("Summaries")
 					.setValue(this.plugin.settings.exportFolder)
 					.onChange(async (value) => {
 						this.plugin.settings.exportFolder = value || "SpeakNotes";
@@ -113,7 +113,7 @@ export class SettingsTab extends PluginSettingTab {
 		// Two-way sync
 		new Setting(containerEl)
 			.setName("Two-way sync")
-			.setDesc("Push local edits back to SpeakNotes when syncing (title and summary changes)")
+			.setDesc("Push local edits back to the cloud when syncing (title and summary changes)")
 			.addToggle((toggle) =>
 				toggle.setValue(this.plugin.settings.enableTwoWaySync).onChange(async (value) => {
 					this.plugin.settings.enableTwoWaySync = value;
@@ -124,7 +124,7 @@ export class SettingsTab extends PluginSettingTab {
 		// Force refresh
 		new Setting(containerEl)
 			.setName("Force refresh")
-			.setDesc("Delete all local summaries and re-download everything from SpeakNotes")
+			.setDesc("Delete all local summaries and re-download everything from the cloud")
 			.addButton((btn) =>
 				btn
 					.setButtonText("Force refresh")
@@ -208,7 +208,7 @@ export class SettingsTab extends PluginSettingTab {
 		const redirectUrl = "obsidian://speaknotes-auth-callback";
 		window.open(`https://speaknotes.io/auth/obsidian?redirect=${encodeURIComponent(redirectUrl)}`);
 
-		new Notice("Opening SpeakNotes login in your browser...");
+		new Notice("Opening login in your browser...");
 	}
 
 	async handleDisconnect(): Promise<void> {
@@ -221,7 +221,7 @@ export class SettingsTab extends PluginSettingTab {
 
 		this.plugin.syncService.stopPeriodicSync();
 
-		new Notice("Disconnected from SpeakNotes");
+		new Notice("Disconnected");
 		this.display();
 	}
 

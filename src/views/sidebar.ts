@@ -28,7 +28,7 @@ export class SidebarView extends ItemView {
 	}
 
 	getDisplayText(): string {
-		return "SpeakNotes";
+		return "Library";
 	}
 
 	getIcon(): string {
@@ -52,7 +52,7 @@ export class SidebarView extends ItemView {
 
 		// Header
 		const header = container.createDiv("speaknotes-sidebar-header");
-		header.createEl("h4", { text: "SpeakNotes library" });
+		header.createEl("h4", { text: "Library" });
 
 		// Sync button
 		const syncBtn = header.createEl("button", {
@@ -60,7 +60,9 @@ export class SidebarView extends ItemView {
 			attr: { "aria-label": "Sync library" },
 		});
 		setIcon(syncBtn, "refresh-cw");
-		syncBtn.onclick = () => this.handleSync();
+		syncBtn.onclick = () => {
+			void this.handleSync();
+		};
 
 		// Search bar
 		const searchContainer = container.createDiv("speaknotes-search-container");
@@ -111,7 +113,7 @@ export class SidebarView extends ItemView {
 		// Connection status
 		if (!this.plugin.settings.userId) {
 			const statusEl = container.createDiv("speaknotes-status-disconnected");
-			statusEl.createEl("p", { text: "Not connected to SpeakNotes" });
+			statusEl.createEl("p", { text: "Not connected" });
 			const connectBtn = statusEl.createEl("button", {
 				text: "Connect account",
 				cls: "mod-cta",
@@ -173,16 +175,16 @@ export class SidebarView extends ItemView {
 
 		// Note content
 		const content = item.createDiv("speaknotes-note-content");
-		content.createEl("div", { cls: "speaknotes-note-title", text: note.title });
+		content.createDiv({ cls: "speaknotes-note-title", text: note.title });
 
 		const meta = content.createDiv("speaknotes-note-meta");
-		meta.createEl("span", {
+		meta.createSpan({
 			text: this.formatDate(note.dateCreated),
 			cls: "speaknotes-note-date",
 		});
 
 		if (note.status !== "Done") {
-			meta.createEl("span", {
+			meta.createSpan({
 				text: note.status,
 				cls: `speaknotes-note-status speaknotes-status-${note.status.toLowerCase()}`,
 			});
@@ -199,7 +201,7 @@ export class SidebarView extends ItemView {
 		setIcon(exportBtn, "download");
 		exportBtn.onclick = (e) => {
 			e.stopPropagation();
-			this.handleExportNote(note);
+			void this.handleExportNote(note);
 		};
 
 		// Insert button
@@ -210,11 +212,13 @@ export class SidebarView extends ItemView {
 		setIcon(insertBtn, "file-input");
 		insertBtn.onclick = (e) => {
 			e.stopPropagation();
-			this.handleInsertNote(note);
+			void this.handleInsertNote(note);
 		};
 
 		// Click to preview
-		item.onclick = () => this.handlePreviewNote(note);
+		item.onclick = () => {
+			void this.handlePreviewNote(note);
+		};
 	}
 
 	getIconForType(type: string): string {
@@ -342,10 +346,10 @@ class NotePreviewModal extends Modal {
 
 		// Metadata
 		const meta = contentEl.createDiv("speaknotes-preview-meta");
-		meta.createEl("span", {
+		meta.createSpan({
 			text: `Type: ${this.note.type}`,
 		});
-		meta.createEl("span", {
+		meta.createSpan({
 			text: `Created: ${new Date(this.note.dateCreated).toLocaleString()}`,
 		});
 
@@ -362,7 +366,7 @@ class NotePreviewModal extends Modal {
 				cls: "speaknotes-preview-transcript",
 			});
 			transcriptToggle.createEl("summary", { text: "Full transcription" });
-			transcriptToggle.createEl("div", {
+			transcriptToggle.createDiv({
 				text: this.note.originalTranscription,
 			});
 		}
@@ -371,7 +375,7 @@ class NotePreviewModal extends Modal {
 		const actions = contentEl.createDiv("speaknotes-preview-actions");
 
 		const exportBtn = actions.createEl("button", {
-			text: "Export to Vault",
+			text: "Export to vault",
 			cls: "mod-cta",
 		});
 		exportBtn.onclick = async () => {

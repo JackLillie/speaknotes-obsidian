@@ -43,7 +43,7 @@ export class RecorderModal extends Modal {
 		this.waveform.height = 100;
 
 		// Timer
-		this.timer = contentEl.createEl("div", {
+		this.timer = contentEl.createDiv({
 			cls: "speaknotes-timer",
 			text: "00:00",
 		});
@@ -194,10 +194,10 @@ export class RecorderModal extends Modal {
 		this.contentEl.addClass("speaknotes-processing-state");
 
 		const processingEl = this.contentEl.createDiv("speaknotes-processing");
-		processingEl.createEl("div", { cls: "speaknotes-spinner" });
-		const statusEl = processingEl.createEl("div", {
+		processingEl.createDiv({ cls: "speaknotes-spinner" });
+		const statusEl = processingEl.createDiv({
 			cls: "speaknotes-processing-status",
-			text: "Uploading to SpeakNotes...",
+			text: "Uploading...",
 		});
 
 		try {
@@ -261,10 +261,10 @@ export class RecorderModal extends Modal {
 				// Update status display
 				statusEl.textContent = `Status: ${note.status}...`;
 
-				await new Promise((resolve) => setTimeout(resolve, 2000));
+				await new Promise((resolve) => activeWindow.setTimeout(resolve, 2000));
 			} catch {
 				// Note might not exist yet, retry
-				await new Promise((resolve) => setTimeout(resolve, 2000));
+				await new Promise((resolve) => activeWindow.setTimeout(resolve, 2000));
 			}
 		}
 
@@ -352,7 +352,7 @@ export class RecorderModal extends Modal {
 
 	stopTimer(): void {
 		if (this.timerInterval !== null) {
-			clearInterval(this.timerInterval);
+			activeWindow.clearInterval(this.timerInterval);
 			this.timerInterval = null;
 		}
 	}
@@ -371,7 +371,7 @@ export class RecorderModal extends Modal {
 		this.stopWaveform();
 
 		if (this.audioContext) {
-			this.audioContext.close();
+			void this.audioContext.close();
 		}
 
 		this.contentEl.empty();

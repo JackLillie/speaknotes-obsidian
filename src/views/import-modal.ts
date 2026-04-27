@@ -57,7 +57,7 @@ export class ImportModal extends Modal {
 		contentEl.empty();
 		contentEl.addClass("speaknotes-import-modal");
 
-		contentEl.createEl("h2", { text: "Import to SpeakNotes" });
+		contentEl.createEl("h2", { text: "Import to cloud" });
 
 		if (this.file) {
 			// Single file mode
@@ -84,7 +84,7 @@ export class ImportModal extends Modal {
 		// Format selector
 		new Setting(contentEl)
 			.setName("Content format")
-			.setDesc("How should SpeakNotes process this content?")
+			.setDesc("How should the content be processed?")
 			.addDropdown((dropdown) => {
 				for (const format of CONTENT_FORMATS) {
 					dropdown.addOption(format.value, format.label);
@@ -98,9 +98,9 @@ export class ImportModal extends Modal {
 		// Folder selector
 		new Setting(contentEl)
 			.setName("Target folder")
-			.setDesc("Which SpeakNotes folder to import to")
+			.setDesc("Which folder to import to")
 			.addDropdown((dropdown) => {
-				dropdown.addOption("", "No Folder");
+				dropdown.addOption("", "No folder");
 				for (const folder of this.folders) {
 					dropdown.addOption(folder.id, folder.name);
 				}
@@ -115,7 +115,7 @@ export class ImportModal extends Modal {
 
 		const importBtn = actionsEl.createEl("button", {
 			cls: "mod-cta",
-			text: this.isImporting ? "Importing..." : "Import to SpeakNotes",
+			text: this.isImporting ? "Importing..." : "Import to cloud",
 		});
 		importBtn.disabled = this.isImporting;
 		importBtn.onclick = () => this.importSingleFile();
@@ -130,7 +130,7 @@ export class ImportModal extends Modal {
 		const { contentEl } = this;
 
 		contentEl.createEl("p", {
-			text: "Select markdown files to import to SpeakNotes",
+			text: "Select Markdown files to import",
 			cls: "speaknotes-import-desc",
 		});
 
@@ -150,7 +150,7 @@ export class ImportModal extends Modal {
 
 		// Folder selector
 		new Setting(contentEl).setName("Target folder").addDropdown((dropdown) => {
-			dropdown.addOption("", "No Folder");
+			dropdown.addOption("", "No folder");
 			for (const folder of this.folders) {
 				dropdown.addOption(folder.id, folder.name);
 			}
@@ -166,7 +166,7 @@ export class ImportModal extends Modal {
 		if (this.files.length === 0) {
 			listEl.createEl("p", {
 				cls: "speaknotes-empty",
-				text: "No markdown files found outside SpeakNotes folder",
+				text: "No Markdown files found outside the export folder",
 			});
 		} else {
 			// Select all
@@ -224,7 +224,7 @@ export class ImportModal extends Modal {
 		// Actions
 		const actionsEl = contentEl.createDiv("speaknotes-import-actions");
 
-		actionsEl.createEl("span", {
+		actionsEl.createSpan({
 			text: `${this.selectedFiles.size} files selected`,
 		});
 
