@@ -1,0 +1,194 @@
+{
+	"plugin": {
+		"name": "SpeakNotes",
+		"loaded": "โหลดปลั๊กอิน SpeakNotes แล้ว",
+		"unloaded": "ยกเลิกการโหลดปลั๊กอิน SpeakNotes แล้ว"
+	},
+	"commands": {
+		"openSidebar": "เปิดคลัง SpeakNotes",
+		"recordVoiceMemo": "บันทึกบันทึกเสียง",
+		"exportCurrentNote": "ส่งออกโน้ตปัจจุบันไปยัง SpeakNotes",
+		"syncLibrary": "ซิงค์คลัง SpeakNotes",
+		"bulkExport": "ส่งออกโน้ตแบบกลุ่ม",
+		"importNotes": "นำเข้าโน้ตไปยัง SpeakNotes",
+		"createBacklinks": "สร้างลิงก์ย้อนกลับในโน้ต SpeakNotes",
+		"openGraphView": "เปิดมุมมองกราฟ SpeakNotes",
+		"transcribeWithSpeakNotes": "ถอดความด้วย SpeakNotes"
+	},
+	"settings": {
+		"title": "การตั้งค่า SpeakNotes",
+		"connection": {
+			"title": "การเชื่อมต่อ",
+			"connectedAccount": "บัญชีที่เชื่อมต่อ",
+			"signedInAs": "ลงชื่อเข้าใช้ในชื่อ {{email}}",
+			"disconnect": "ยกเลิกการเชื่อมต่อ",
+			"lastSync": "ซิงค์ล่าสุดเมื่อ",
+			"syncNow": "ซิงค์ตอนนี้",
+			"connectAccount": "เชื่อมต่อบัญชี",
+			"connectDesc": "ลงชื่อเข้าใช้ด้วยบัญชี SpeakNotes ของคุณเพื่อซิงค์โน้ต",
+			"loginButton": "เข้าสู่ระบบด้วย SpeakNotes",
+			"openingLogin": "กำลังเปิดหน้าเข้าสู่ระบบ SpeakNotes ในเบราว์เซอร์ของคุณ...",
+			"disconnected": "ตัดการเชื่อมต่อจาก SpeakNotes แล้ว",
+			"successfullyConnected": "SpeakNotes: เชื่อมต่อสำเร็จแล้ว!"
+		},
+		"sync": {
+			"title": "การตั้งค่าการซิงค์",
+			"exportFolder": "โฟลเดอร์ส่งออก",
+			"exportFolderDesc": "โฟลเดอร์ใน Vault ของคุณที่จะบันทึก SpeakNotes",
+			"autoSync": "ซิงค์อัตโนมัติ",
+			"autoSyncDesc": "ซิงค์โน้ตโดยอัตโนมัติเมื่อเริ่มต้นระบบ",
+			"syncInterval": "ช่วงเวลาการซิงค์",
+			"syncIntervalDesc": "ความถี่ในการซิงค์เป็นนาที (0 เพื่อปิดใช้งานการซิงค์เป็นระยะ)"
+		},
+		"content": {
+			"title": "การตั้งค่าเนื้อหา",
+			"defaultFormat": "รูปแบบสรุปเริ่มต้น",
+			"defaultFormatDesc": "รูปแบบเริ่มต้นสำหรับการบันทึกใหม่",
+			"includeTranscription": "รวมการถอดความฉบับเต็ม",
+			"includeTranscriptionDesc": "รวมการถอดความฉบับเต็มในโน้ตที่ส่งออก",
+			"exportTemplate": "เทมเพลตการส่งออก",
+			"exportTemplateDesc": "เทมเพลต Markdown แบบกำหนดเอง ตัวแปรที่ใช้งานได้: {{id}}, {{title}}, {{created}}, {{updated}}, {{type}}, {{status}}, {{format}}, {{isPinned}}, {{summary}}, {{transcription}}",
+			"templatePlaceholder": "ปล่อยว่างไว้สำหรับเทมเพลตเริ่มต้น"
+		},
+		"about": {
+			"title": "เกี่ยวกับ",
+			"pluginName": "SpeakNotes สำหรับ Obsidian",
+			"version": "เวอร์ชัน {{version}}",
+			"visitWebsite": "เยี่ยมชมเว็บไซต์",
+			"support": "การสนับสนุน",
+			"supportDesc": "ขอความช่วยเหลือหรือรายงานปัญหา",
+			"documentation": "เอกสารประกอบ"
+		}
+	},
+	"sidebar": {
+		"title": "คลัง SpeakNotes",
+		"syncLibrary": "ซิงค์คลัง",
+		"searchPlaceholder": "ค้นหาโน้ต...",
+		"allFolders": "โฟลเดอร์ทั้งหมด",
+		"notConnected": "ไม่ได้เชื่อมต่อกับ SpeakNotes",
+		"connectAccount": "เชื่อมต่อบัญชี",
+		"loadingNotes": "กำลังโหลดบันทึก...",
+		"noMatchingNotes": "ไม่พบบันทึกที่ตรงกัน",
+		"noNotesYet": "ยังไม่มีบันทึก",
+		"exportToVault": "ส่งออกไปยัง Vault",
+		"insertIntoNote": "แทรกลงในบันทึกปัจจุบัน",
+		"failedToLoadNotes": "โหลดบันทึกไม่สำเร็จ:",
+		"summary": "สรุป",
+		"fullTranscription": "การถอดเสียงฉบับเต็ม",
+		"exportToVaultButton": "ส่งออกไปยัง Vault"
+	},
+	"statusBar": {
+		"syncing": "กำลังซิงค์...",
+		"synced": "ซิงค์แล้ว",
+		"syncError": "การซิงค์ผิดพลาด",
+		"offline": "ออฟไลน์",
+		"notConnected": "ไม่ได้เชื่อมต่อ"
+	},
+	"recorder": {
+		"title": "บันทึกเสียง",
+		"startRecording": "เริ่มบันทึก",
+		"stopRecording": "หยุดบันทึก",
+		"titleLabel": "ชื่อเรื่อง (ไม่บังคับ)",
+		"titlePlaceholder": "บันทึกเสียง",
+		"formatLabel": "รูปแบบการสรุป",
+		"failedMicrophone": "เข้าถึงไมโครโฟนไม่สำเร็จ โปรดตรวจสอบการอนุญาต",
+		"uploading": "กำลังอัปโหลดไปยัง SpeakNotes...",
+		"notAuthenticated": "ไม่ได้เข้าสู่ระบบ โปรดเชื่อมต่อบัญชี SpeakNotes ของคุณ",
+		"processingTranscription": "กำลังดำเนินการถอดเสียง...",
+		"creatingNote": "กำลังสร้างบันทึกใน Vault...",
+		"transcriptionFailed": "การถอดเสียงล้มเหลว",
+		"timeout": "หมดเวลาในการรอการถอดเสียง"
+	},
+	"export": {
+		"title": "ส่งออกไปยัง SpeakNotes",
+		"descriptionSelected": "ส่งออกข้อความที่เลือกไปยัง SpeakNotes เพื่อทำการสรุป",
+		"descriptionNote": "ส่งออกบันทึกปัจจุบันไปยัง SpeakNotes เพื่อทำการสรุป",
+		"contentPreview": "ตัวอย่างเนื้อหา",
+		"noteTitlePlaceholder": "ชื่อบันทึก",
+		"formatLabel": "รูปแบบการสรุป",
+		"exportButton": "ส่งออกไปยัง SpeakNotes",
+		"defaultTitle": "บันทึก Obsidian",
+		"cancel": "ยกเลิก",
+		"unsupportedFileType": "ไม่รองรับไฟล์ประเภทนี้สำหรับการประมวลผลของ SpeakNotes",
+		"transcribeButton": "ถอดเสียงด้วย SpeakNotes",
+		"bulkExportNotImplemented": "ยังไม่รองรับการส่งออกจำนวนมาก โปรดใช้แถบด้านข้างเพื่อส่งออกบันทึกทีละรายการ",
+		"sendingToSpeakNotes": "กำลังส่งไปยัง SpeakNotes...",
+		"textExportNotImplemented": "การส่งออกข้อความยังไม่สมบูรณ์ โปรดใช้เว็บแอป",
+		"readingFile": "กำลังอ่านไฟล์...",
+		"uploadingFile": "กำลังอัปโหลดไปยัง SpeakNotes...",
+		"unsupportedType": "ไม่รองรับประเภทไฟล์"
+	},
+	"import": {
+		"title": "นำเข้าสู่ SpeakNotes",
+		"contentFormat": "รูปแบบเนื้อหา",
+		"contentFormatDesc": "SpeakNotes ควรประมวลผลเนื้อหานี้อย่างไร?",
+		"targetFolder": "โฟลเดอร์ปลายทาง",
+		"targetFolderDesc": "โฟลเดอร์ SpeakNotes ใดที่ต้องการนำเข้า",
+		"noFolder": "ไม่มีโฟลเดอร์",
+		"importing": "กำลังนำเข้า...",
+		"importButton": "นำเข้าไปยัง SpeakNotes",
+		"cancel": "ยกเลิก",
+		"selectFiles": "เลือกไฟล์ markdown เพื่อนำเข้าไปยัง SpeakNotes",
+		"formatForAll": "รูปแบบที่จะใช้กับโน้ตที่นำเข้าทั้งหมด",
+		"noFilesFound": "ไม่พบไฟล์ markdown นอกโฟลเดอร์ SpeakNotes",
+		"importSelected": "นำเข้าที่เลือก"
+	},
+	"bulkExport": {
+		"title": "ส่งออกโน้ตแบบกลุ่ม",
+		"loadingNotes": "กำลังโหลดโน้ต...",
+		"filterByFolder": "กรองตามโฟลเดอร์",
+		"allFolders": "ทุกโฟลเดอร์",
+		"filterByStatus": "กรองตามสถานะ",
+		"completed": "เสร็จสมบูรณ์",
+		"allStatuses": "ทุกสถานะ",
+		"noNotesFound": "ไม่พบโน้ต",
+		"exporting": "กำลังส่งออก...",
+		"exportSelected": "ส่งออกที่เลือก",
+		"cancel": "ยกเลิก",
+		"alreadyInVault": "อยู่ใน vault แล้ว"
+	},
+	"graph": {
+		"title": "มุมมองกราฟ SpeakNotes"
+	},
+	"sync": {
+		"alreadyInProgress": "SpeakNotes: กำลังดำเนินการซิงค์อยู่",
+		"notConnected": "SpeakNotes: ไม่ได้เชื่อมต่อ โปรดเชื่อมต่อบัญชีของคุณ",
+		"starting": "SpeakNotes: กำลังเริ่มการซิงค์...",
+		"synced": "SpeakNotes: ซิงค์แล้ว {{count}} โน้ต",
+		"failed": "SpeakNotes: การซิงค์ล้มเหลว - {{message}}"
+	},
+	"backlinks": {
+		"noNewBacklinks": "ไม่พบแบ็คลิงก์ใหม่"
+	},
+	"errors": {
+		"failedToLoadContent": "โหลดเนื้อหา SpeakNotes ล้มเหลว",
+		"failedToRegister": "ลงทะเบียนการผสานรวม Obsidian ล้มเหลว:",
+		"noteNotFound": "ไม่พบโน้ต",
+		"folderNotFound": "ไม่พบโฟลเดอร์"
+	},
+	"formats": {
+		"note": "โน้ต",
+		"transcript": "ถอดความ",
+		"bulletpoints": "หัวข้อสัญลักษณ์",
+		"blogPost": "โพสต์บล็อก",
+		"tweetThread": "เธรดทวีต",
+		"linkedinArticle": "บทความ LinkedIn",
+		"meetingNotes": "บันทึกการประชุม",
+		"newsArticle": "บทความข่าว",
+		"qaFormat": "รูปแบบถาม-ตอบ",
+		"presentationSlides": "สไลด์นำเสนอ",
+		"bookSummary": "สรุปหนังสือ",
+		"flashCards": "บัตรคำศัพท์",
+		"emailNewsletter": "จดหมายข่าวทางอีเมล",
+		"videoScript": "สคริปต์วิดีโอ"
+	},
+	"common": {
+		"close": "ปิด",
+		"save": "บันทึก",
+		"delete": "ลบ",
+		"edit": "แก้ไข",
+		"loading": "กำลังโหลด...",
+		"error": "ข้อผิดพลาด",
+		"success": "สำเร็จ"
+	}
+}

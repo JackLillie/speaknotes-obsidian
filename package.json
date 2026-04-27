@@ -1,0 +1,39 @@
+{
+	"name": "speaknotes-obsidian",
+	"version": "1.0.0",
+	"description": "SpeakNotes integration for Obsidian - Transcribe and summarize audio directly in Obsidian",
+	"main": "main.js",
+	"scripts": {
+		"dev": "node esbuild.config.mjs",
+		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+		"build:production": "pnpm build && zip -r speaknotes-obsidian.zip main.js manifest.json styles.css",
+		"release": "pnpm build:production && node scripts/publish.mjs",
+		"typecheck": "tsc --noEmit",
+		"lint": "eslint src/"
+	},
+	"keywords": [
+		"obsidian",
+		"plugin",
+		"speaknotes",
+		"transcription",
+		"audio",
+		"voice-memo"
+	],
+	"author": "SpeakNotes",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "^22.15.3",
+		"@typescript-eslint/eslint-plugin": "^8.42.0",
+		"@typescript-eslint/parser": "^8.42.0",
+		"builtin-modules": "^4.0.0",
+		"esbuild": "^0.24.2",
+		"eslint": "^9.35.0",
+		"obsidian": "^1.7.2",
+		"typescript": "^5.8.3"
+	},
+	"dependencies": {
+		"@aws-sdk/client-s3": "^3.705.0",
+		"dotenv": "^16.4.7",
+		"i18next": "^25.7.4"
+	}
+}

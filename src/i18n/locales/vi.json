@@ -1,0 +1,194 @@
+{
+	"plugin": {
+		"name": "SpeakNotes",
+		"loaded": "Đã tải plugin SpeakNotes",
+		"unloaded": "Đã gỡ plugin SpeakNotes"
+	},
+	"commands": {
+		"openSidebar": "Mở Thư viện SpeakNotes",
+		"recordVoiceMemo": "Ghi âm ghi chú thoại",
+		"exportCurrentNote": "Xuất ghi chú hiện tại sang SpeakNotes",
+		"syncLibrary": "Đồng bộ Thư viện SpeakNotes",
+		"bulkExport": "Xuất ghi chú hàng loạt",
+		"importNotes": "Nhập ghi chú vào SpeakNotes",
+		"createBacklinks": "Tạo liên kết ngược trong ghi chú SpeakNotes",
+		"openGraphView": "Mở Chế độ xem biểu đồ SpeakNotes",
+		"transcribeWithSpeakNotes": "Chuyển âm thành văn với SpeakNotes"
+	},
+	"settings": {
+		"title": "Cài đặt SpeakNotes",
+		"connection": {
+			"title": "Kết nối",
+			"connectedAccount": "Tài khoản đã kết nối",
+			"signedInAs": "Đã đăng nhập với tên {{email}}",
+			"disconnect": "Ngắt kết nối",
+			"lastSync": "Lần đồng bộ cuối",
+			"syncNow": "Đồng bộ ngay",
+			"connectAccount": "Kết nối tài khoản",
+			"connectDesc": "Đăng nhập bằng tài khoản SpeakNotes của bạn để đồng bộ ghi chú",
+			"loginButton": "Đăng nhập với SpeakNotes",
+			"openingLogin": "Đang mở trang đăng nhập SpeakNotes trong trình duyệt của bạn...",
+			"disconnected": "Đã ngắt kết nối khỏi SpeakNotes",
+			"successfullyConnected": "SpeakNotes: Kết nối thành công!"
+		},
+		"sync": {
+			"title": "Cài đặt đồng bộ",
+			"exportFolder": "Thư mục xuất",
+			"exportFolderDesc": "Thư mục trong vault của bạn nơi SpeakNotes sẽ được lưu",
+			"autoSync": "Tự động đồng bộ",
+			"autoSyncDesc": "Tự động đồng bộ ghi chú khi khởi động",
+			"syncInterval": "Khoảng thời gian đồng bộ",
+			"syncIntervalDesc": "Tần suất đồng bộ tính bằng phút (0 để tắt đồng bộ định kỳ)"
+		},
+		"content": {
+			"title": "Cài đặt nội dung",
+			"defaultFormat": "Định dạng tóm tắt mặc định",
+			"defaultFormatDesc": "Định dạng mặc định cho các bản ghi mới",
+			"includeTranscription": "Bao gồm bản chuyển âm đầy đủ",
+			"includeTranscriptionDesc": "Bao gồm bản chuyển âm đầy đủ trong các ghi chú được xuất",
+			"exportTemplate": "Mẫu xuất",
+			"exportTemplateDesc": "Mẫu Markdown tùy chỉnh. Các biến khả dụng: {{id}}, {{title}}, {{created}}, {{updated}}, {{type}}, {{status}}, {{format}}, {{isPinned}}, {{summary}}, {{transcription}}",
+			"templatePlaceholder": "Để trống để sử dụng mẫu mặc định"
+		},
+		"about": {
+			"title": "Giới thiệu",
+			"pluginName": "SpeakNotes cho Obsidian",
+			"version": "Phiên bản {{version}}",
+			"visitWebsite": "Truy cập trang web",
+			"support": "Hỗ trợ",
+			"supportDesc": "Nhận trợ giúp hoặc báo cáo sự cố",
+			"documentation": "Tài liệu hướng dẫn"
+		}
+	},
+	"sidebar": {
+		"title": "Thư viện SpeakNotes",
+		"syncLibrary": "Đồng bộ thư viện",
+		"searchPlaceholder": "Tìm kiếm ghi chú...",
+		"allFolders": "Tất cả thư mục",
+		"notConnected": "Chưa kết nối với SpeakNotes",
+		"connectAccount": "Kết nối tài khoản",
+		"loadingNotes": "Đang tải ghi chú...",
+		"noMatchingNotes": "Không tìm thấy ghi chú phù hợp",
+		"noNotesYet": "Chưa có ghi chú nào",
+		"exportToVault": "Xuất vào kho lưu trữ",
+		"insertIntoNote": "Chèn vào ghi chú hiện tại",
+		"failedToLoadNotes": "Tải ghi chú thất bại:",
+		"summary": "Tóm tắt",
+		"fullTranscription": "Bản chép lời đầy đủ",
+		"exportToVaultButton": "Xuất vào Kho lưu trữ"
+	},
+	"statusBar": {
+		"syncing": "Đang đồng bộ...",
+		"synced": "Đã đồng bộ",
+		"syncError": "Lỗi đồng bộ",
+		"offline": "Ngoại tuyến",
+		"notConnected": "Chưa kết nối"
+	},
+	"recorder": {
+		"title": "Ghi âm ghi chú thoại",
+		"startRecording": "Bắt đầu ghi âm",
+		"stopRecording": "Dừng ghi âm",
+		"titleLabel": "Tiêu đề (tùy chọn)",
+		"titlePlaceholder": "Ghi chú thoại",
+		"formatLabel": "Định dạng tóm tắt",
+		"failedMicrophone": "Không thể truy cập micrô. Vui lòng kiểm tra quyền truy cập.",
+		"uploading": "Đang tải lên SpeakNotes...",
+		"notAuthenticated": "Chưa được xác thực. Vui lòng kết nối tài khoản SpeakNotes của bạn.",
+		"processingTranscription": "Đang xử lý bản chép lời...",
+		"creatingNote": "Đang tạo ghi chú trong kho lưu trữ...",
+		"transcriptionFailed": "Chép lời thất bại",
+		"timeout": "Hết thời gian chờ bản chép lời"
+	},
+	"export": {
+		"title": "Xuất sang SpeakNotes",
+		"descriptionSelected": "Xuất văn bản đã chọn sang SpeakNotes để tóm tắt.",
+		"descriptionNote": "Xuất ghi chú hiện tại sang SpeakNotes để tóm tắt.",
+		"contentPreview": "Xem trước nội dung",
+		"noteTitlePlaceholder": "Tiêu đề ghi chú",
+		"formatLabel": "Định dạng tóm tắt",
+		"exportButton": "Xuất sang SpeakNotes",
+		"defaultTitle": "Ghi chú Obsidian",
+		"cancel": "Hủy",
+		"unsupportedFileType": "Loại tệp này không được hỗ trợ để xử lý bằng SpeakNotes.",
+		"transcribeButton": "Chép lời bằng SpeakNotes",
+		"bulkExportNotImplemented": "Tính năng xuất hàng loạt chưa được triển khai. Sử dụng thanh bên để xuất từng ghi chú.",
+		"sendingToSpeakNotes": "Đang gửi đến SpeakNotes...",
+		"textExportNotImplemented": "Tính năng xuất văn bản chưa được triển khai đầy đủ. Vui lòng sử dụng ứng dụng web.",
+		"readingFile": "Đang đọc tệp...",
+		"uploadingFile": "Đang tải lên SpeakNotes...",
+		"unsupportedType": "Loại tệp không được hỗ trợ"
+	},
+	"import": {
+		"title": "Nhập vào SpeakNotes",
+		"contentFormat": "Định dạng nội dung",
+		"contentFormatDesc": "SpeakNotes nên xử lý nội dung này như thế nào?",
+		"targetFolder": "Thư mục đích",
+		"targetFolderDesc": "Thư mục SpeakNotes nào để nhập vào",
+		"noFolder": "Không có thư mục",
+		"importing": "Đang nhập...",
+		"importButton": "Nhập vào SpeakNotes",
+		"cancel": "Hủy",
+		"selectFiles": "Chọn các tệp markdown để nhập vào SpeakNotes",
+		"formatForAll": "Định dạng áp dụng cho tất cả các ghi chú được nhập",
+		"noFilesFound": "Không tìm thấy tệp markdown nào bên ngoài thư mục SpeakNotes",
+		"importSelected": "Nhập các mục đã chọn"
+	},
+	"bulkExport": {
+		"title": "Xuất ghi chú hàng loạt",
+		"loadingNotes": "Đang tải ghi chú...",
+		"filterByFolder": "Lọc theo thư mục",
+		"allFolders": "Tất cả thư mục",
+		"filterByStatus": "Lọc theo trạng thái",
+		"completed": "Đã hoàn thành",
+		"allStatuses": "Tất cả trạng thái",
+		"noNotesFound": "Không tìm thấy ghi chú nào",
+		"exporting": "Đang xuất...",
+		"exportSelected": "Xuất các mục đã chọn",
+		"cancel": "Hủy",
+		"alreadyInVault": "Đã có trong vault"
+	},
+	"graph": {
+		"title": "Chế độ xem biểu đồ SpeakNotes"
+	},
+	"sync": {
+		"alreadyInProgress": "SpeakNotes: Đang trong quá trình đồng bộ hóa",
+		"notConnected": "SpeakNotes: Chưa kết nối. Vui lòng kết nối tài khoản của bạn.",
+		"starting": "SpeakNotes: Bắt đầu đồng bộ hóa...",
+		"synced": "SpeakNotes: Đã đồng bộ hóa {{count}} ghi chú",
+		"failed": "SpeakNotes: Đồng bộ hóa thất bại - {{message}}"
+	},
+	"backlinks": {
+		"noNewBacklinks": "Không tìm thấy liên kết ngược mới"
+	},
+	"errors": {
+		"failedToLoadContent": "Không thể tải nội dung SpeakNotes",
+		"failedToRegister": "Không thể đăng ký tích hợp Obsidian:",
+		"noteNotFound": "Không tìm thấy ghi chú",
+		"folderNotFound": "Không tìm thấy thư mục"
+	},
+	"formats": {
+		"note": "Ghi chú",
+		"transcript": "Bản ghi âm",
+		"bulletpoints": "Dấu đầu dòng",
+		"blogPost": "Bài viết Blog",
+		"tweetThread": "Chuỗi Tweet",
+		"linkedinArticle": "Bài viết LinkedIn",
+		"meetingNotes": "Ghi chú cuộc họp",
+		"newsArticle": "Bài báo tin tức",
+		"qaFormat": "Định dạng Hỏi & Đáp",
+		"presentationSlides": "Trang thuyết trình",
+		"bookSummary": "Tóm tắt sách",
+		"flashCards": "Thẻ ghi nhớ",
+		"emailNewsletter": "Bản tin Email",
+		"videoScript": "Kịch bản video"
+	},
+	"common": {
+		"close": "Đóng",
+		"save": "Lưu",
+		"delete": "Xóa",
+		"edit": "Chỉnh sửa",
+		"loading": "Đang tải...",
+		"error": "Lỗi",
+		"success": "Thành công"
+	}
+}

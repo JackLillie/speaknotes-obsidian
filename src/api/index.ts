@@ -1,0 +1,1 @@
+export { SpeakNotesAPI } from "./client";

@@ -1,0 +1,194 @@
+{
+	"plugin": {
+		"name": "SpeakNotes",
+		"loaded": "SpeakNotes eklentisi yüklendi",
+		"unloaded": "SpeakNotes eklentisi kaldırıldı"
+	},
+	"commands": {
+		"openSidebar": "SpeakNotes Kitaplığını Aç",
+		"recordVoiceMemo": "Sesli Not Kaydet",
+		"exportCurrentNote": "Mevcut Notu SpeakNotes'a Aktar",
+		"syncLibrary": "SpeakNotes Kitaplığını Senkronize Et",
+		"bulkExport": "Notları Toplu Aktar",
+		"importNotes": "Notları SpeakNotes'a İçe Aktar",
+		"createBacklinks": "SpeakNotes Notlarında Geri Bağlantılar Oluştur",
+		"openGraphView": "SpeakNotes Grafik Görünümünü Aç",
+		"transcribeWithSpeakNotes": "SpeakNotes ile Metne Dönüştür"
+	},
+	"settings": {
+		"title": "SpeakNotes Ayarları",
+		"connection": {
+			"title": "Bağlantı",
+			"connectedAccount": "Bağlı Hesap",
+			"signedInAs": "{{email}} olarak oturum açıldı",
+			"disconnect": "Bağlantıyı Kes",
+			"lastSync": "Son Senkronizasyon",
+			"syncNow": "Şimdi Senkronize Et",
+			"connectAccount": "Hesabı Bağla",
+			"connectDesc": "Notları senkronize etmek için SpeakNotes hesabınızla oturum açın",
+			"loginButton": "SpeakNotes ile Giriş Yap",
+			"openingLogin": "Tarayıcınızda SpeakNotes girişi açılıyor...",
+			"disconnected": "SpeakNotes bağlantısı kesildi",
+			"successfullyConnected": "SpeakNotes: Başarıyla bağlandı!"
+		},
+		"sync": {
+			"title": "Senkronizasyon Ayarları",
+			"exportFolder": "Aktarma Klasörü",
+			"exportFolderDesc": "Kasanızda SpeakNotes notlarının kaydedileceği klasör",
+			"autoSync": "Otomatik Senkronizasyon",
+			"autoSyncDesc": "Başlangıçta notları otomatik olarak senkronize et",
+			"syncInterval": "Senkronizasyon Aralığı",
+			"syncIntervalDesc": "Dakika cinsinden senkronizasyon sıklığı (periyodik senkronizasyonu devre dışı bırakmak için 0)"
+		},
+		"content": {
+			"title": "İçerik Ayarları",
+			"defaultFormat": "Varsayılan Özet Formatı",
+			"defaultFormatDesc": "Yeni kayıtlar için varsayılan format",
+			"includeTranscription": "Tam Metin Dönüşümünü Dahil Et",
+			"includeTranscriptionDesc": "Aktarılan notlara tam metin dönüşümünü dahil et",
+			"exportTemplate": "Aktarma Şablonu",
+			"exportTemplateDesc": "Özel Markdown şablonu. Kullanılabilir değişkenler: {{id}}, {{title}}, {{created}}, {{updated}}, {{type}}, {{status}}, {{format}}, {{isPinned}}, {{summary}}, {{transcription}}",
+			"templatePlaceholder": "Varsayılan şablon için boş bırakın"
+		},
+		"about": {
+			"title": "Hakkında",
+			"pluginName": "Obsidian için SpeakNotes",
+			"version": "Sürüm {{version}}",
+			"visitWebsite": "Web Sitesini Ziyaret Et",
+			"support": "Destek",
+			"supportDesc": "Yardım alın veya sorunları bildirin",
+			"documentation": "Dokümantasyon"
+		}
+	},
+	"sidebar": {
+		"title": "SpeakNotes Kitaplığı",
+		"syncLibrary": "Kitaplığı senkronize et",
+		"searchPlaceholder": "Notlarda ara...",
+		"allFolders": "Tüm Klasörler",
+		"notConnected": "SpeakNotes'a bağlı değil",
+		"connectAccount": "Hesabı Bağla",
+		"loadingNotes": "Notlar yükleniyor...",
+		"noMatchingNotes": "Eşleşen not bulunamadı",
+		"noNotesYet": "Henüz not yok",
+		"exportToVault": "Kasaya aktar",
+		"insertIntoNote": "Mevcut nota ekle",
+		"failedToLoadNotes": "Notlar yüklenemedi:",
+		"summary": "Özet",
+		"fullTranscription": "Tam Transkripsiyon",
+		"exportToVaultButton": "Kasaya Aktar"
+	},
+	"statusBar": {
+		"syncing": "Eşitleniyor...",
+		"synced": "Eşitlendi",
+		"syncError": "Eşitleme hatası",
+		"offline": "Çevrimdışı",
+		"notConnected": "Bağlı değil"
+	},
+	"recorder": {
+		"title": "Sesli Not Kaydet",
+		"startRecording": "Kaydı Başlat",
+		"stopRecording": "Kaydı Durdur",
+		"titleLabel": "Başlık (isteğe bağlı)",
+		"titlePlaceholder": "Sesli Not",
+		"formatLabel": "Özet Formatı",
+		"failedMicrophone": "Mikrofona erişilemedi. Lütfen izinleri kontrol edin.",
+		"uploading": "SpeakNotes'a yükleniyor...",
+		"notAuthenticated": "Kimlik doğrulanmadı. Lütfen SpeakNotes hesabınızı bağlayın.",
+		"processingTranscription": "Transkripsiyon işleniyor...",
+		"creatingNote": "Kasada not oluşturuluyor...",
+		"transcriptionFailed": "Transkripsiyon başarısız oldu",
+		"timeout": "Transkripsiyon beklenirken zaman aşımı oluştu"
+	},
+	"export": {
+		"title": "SpeakNotes'a Aktar",
+		"descriptionSelected": "Seçilen metni özetleme için SpeakNotes'a aktar.",
+		"descriptionNote": "Mevcut notu özetleme için SpeakNotes'a aktar.",
+		"contentPreview": "İçerik Önizleme",
+		"noteTitlePlaceholder": "Not başlığı",
+		"formatLabel": "Özet Formatı",
+		"exportButton": "SpeakNotes'a Aktar",
+		"defaultTitle": "Obsidian Notu",
+		"cancel": "İptal",
+		"unsupportedFileType": "Bu dosya türü SpeakNotes işlemi için desteklenmiyor.",
+		"transcribeButton": "SpeakNotes ile yazıya dök",
+		"bulkExportNotImplemented": "Toplu aktarım henüz uygulanmadı. Tekil notları aktarmak için kenar çubuğunu kullanın.",
+		"sendingToSpeakNotes": "SpeakNotes'a gönderiliyor...",
+		"textExportNotImplemented": "Metin aktarımı henüz tam olarak uygulanmadı. Lütfen web uygulamasını kullanın.",
+		"readingFile": "Dosya okunuyor...",
+		"uploadingFile": "SpeakNotes'a yükleniyor...",
+		"unsupportedType": "Desteklenmeyen dosya türü"
+	},
+	"import": {
+		"title": "SpeakNotes'a İçe Aktar",
+		"contentFormat": "İçerik Formatı",
+		"contentFormatDesc": "SpeakNotes bu içeriği nasıl işlemeli?",
+		"targetFolder": "Hedef Klasör",
+		"targetFolderDesc": "Hangi SpeakNotes klasörüne aktarılacak",
+		"noFolder": "Klasör Yok",
+		"importing": "Aktarılıyor...",
+		"importButton": "SpeakNotes'a Aktar",
+		"cancel": "İptal",
+		"selectFiles": "SpeakNotes'a aktarılacak markdown dosyalarını seçin",
+		"formatForAll": "Tüm aktarılan notlara uygulanacak format",
+		"noFilesFound": "SpeakNotes klasörü dışında markdown dosyası bulunamadı",
+		"importSelected": "Seçilenleri Aktar"
+	},
+	"bulkExport": {
+		"title": "Notları Toplu Dışa Aktar",
+		"loadingNotes": "Notlar yükleniyor...",
+		"filterByFolder": "Klasöre göre filtrele",
+		"allFolders": "Tüm Klasörler",
+		"filterByStatus": "Duruma göre filtrele",
+		"completed": "Tamamlandı",
+		"allStatuses": "Tüm Durumlar",
+		"noNotesFound": "Not bulunamadı",
+		"exporting": "Dışa aktarılıyor...",
+		"exportSelected": "Seçilenleri Dışa Aktar",
+		"cancel": "İptal",
+		"alreadyInVault": "Zaten kasada"
+	},
+	"graph": {
+		"title": "SpeakNotes Grafik Görünümü"
+	},
+	"sync": {
+		"alreadyInProgress": "SpeakNotes: Senkronizasyon zaten devam ediyor",
+		"notConnected": "SpeakNotes: Bağlı değil. Lütfen hesabınızı bağlayın.",
+		"starting": "SpeakNotes: Senkronizasyon başlatılıyor...",
+		"synced": "SpeakNotes: {{count}} not senkronize edildi",
+		"failed": "SpeakNotes: Senkronizasyon başarısız - {{message}}"
+	},
+	"backlinks": {
+		"noNewBacklinks": "Yeni geri bağlantı bulunamadı"
+	},
+	"errors": {
+		"failedToLoadContent": "SpeakNotes içeriği yüklenemedi",
+		"failedToRegister": "Obsidian entegrasyonu kaydedilemedi:",
+		"noteNotFound": "Not bulunamadı",
+		"folderNotFound": "Klasör bulunamadı"
+	},
+	"formats": {
+		"note": "Not",
+		"transcript": "Transkript",
+		"bulletpoints": "Madde İşaretleri",
+		"blogPost": "Blog Yazısı",
+		"tweetThread": "Tweet Dizisi",
+		"linkedinArticle": "LinkedIn Makalesi",
+		"meetingNotes": "Toplantı Notları",
+		"newsArticle": "Haber Makalesi",
+		"qaFormat": "Soru-Cevap Formatı",
+		"presentationSlides": "Sunum Slaytları",
+		"bookSummary": "Kitap Özeti",
+		"flashCards": "Bilgi Kartları",
+		"emailNewsletter": "E-posta Bülteni",
+		"videoScript": "Video Senaryosu"
+	},
+	"common": {
+		"close": "Kapat",
+		"save": "Kaydet",
+		"delete": "Sil",
+		"edit": "Düzenle",
+		"loading": "Yükleniyor...",
+		"error": "Hata",
+		"success": "Başarılı"
+	}
+}

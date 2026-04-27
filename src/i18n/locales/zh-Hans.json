@@ -1,0 +1,194 @@
+{
+	"plugin": {
+		"name": "SpeakNotes",
+		"loaded": "SpeakNotes 插件已加载",
+		"unloaded": "SpeakNotes 插件已卸载"
+	},
+	"commands": {
+		"openSidebar": "打开 SpeakNotes 库",
+		"recordVoiceMemo": "录制语音备忘录",
+		"exportCurrentNote": "导出当前笔记到 SpeakNotes",
+		"syncLibrary": "同步 SpeakNotes 库",
+		"bulkExport": "批量导出笔记",
+		"importNotes": "导入笔记到 SpeakNotes",
+		"createBacklinks": "在 SpeakNotes 笔记中创建反向链接",
+		"openGraphView": "打开 SpeakNotes 关系图谱",
+		"transcribeWithSpeakNotes": "使用 SpeakNotes 转录"
+	},
+	"settings": {
+		"title": "SpeakNotes 设置",
+		"connection": {
+			"title": "连接",
+			"connectedAccount": "已连接的账户",
+			"signedInAs": "已登录为 {{email}}",
+			"disconnect": "断开连接",
+			"lastSync": "上次同步",
+			"syncNow": "立即同步",
+			"connectAccount": "连接账户",
+			"connectDesc": "登录您的 SpeakNotes 账户以同步笔记",
+			"loginButton": "使用 SpeakNotes 登录",
+			"openingLogin": "正在浏览器中打开 SpeakNotes 登录页面...",
+			"disconnected": "已断开与 SpeakNotes 的连接",
+			"successfullyConnected": "SpeakNotes：连接成功！"
+		},
+		"sync": {
+			"title": "同步设置",
+			"exportFolder": "导出文件夹",
+			"exportFolderDesc": "SpeakNotes 笔记在库中的保存位置",
+			"autoSync": "自动同步",
+			"autoSyncDesc": "启动时自动同步笔记",
+			"syncInterval": "同步间隔",
+			"syncIntervalDesc": "同步频率（分钟，设为 0 以禁用定期同步）"
+		},
+		"content": {
+			"title": "内容设置",
+			"defaultFormat": "默认摘要格式",
+			"defaultFormatDesc": "新录音的默认格式",
+			"includeTranscription": "包含完整转录",
+			"includeTranscriptionDesc": "在导出的笔记中包含完整转录文本",
+			"exportTemplate": "导出模板",
+			"exportTemplateDesc": "自定义 Markdown 模板。可用变量：{{id}}, {{title}}, {{created}}, {{updated}}, {{type}}, {{status}}, {{format}}, {{isPinned}}, {{summary}}, {{transcription}}",
+			"templatePlaceholder": "留空则使用默认模板"
+		},
+		"about": {
+			"title": "关于",
+			"pluginName": "适用于 Obsidian 的 SpeakNotes",
+			"version": "版本 {{version}}",
+			"visitWebsite": "访问网站",
+			"support": "支持",
+			"supportDesc": "获取帮助或报告问题",
+			"documentation": "文档"
+		}
+	},
+	"sidebar": {
+		"title": "SpeakNotes 库",
+		"syncLibrary": "同步库",
+		"searchPlaceholder": "搜索笔记...",
+		"allFolders": "所有文件夹",
+		"notConnected": "未连接到 SpeakNotes",
+		"connectAccount": "连接账户",
+		"loadingNotes": "正在加载笔记...",
+		"noMatchingNotes": "未找到匹配的笔记",
+		"noNotesYet": "尚无笔记",
+		"exportToVault": "导出到库",
+		"insertIntoNote": "插入到当前笔记",
+		"failedToLoadNotes": "加载笔记失败：",
+		"summary": "摘要",
+		"fullTranscription": "完整转录",
+		"exportToVaultButton": "导出到库"
+	},
+	"statusBar": {
+		"syncing": "正在同步...",
+		"synced": "已同步",
+		"syncError": "同步错误",
+		"offline": "离线",
+		"notConnected": "未连接"
+	},
+	"recorder": {
+		"title": "录制语音备忘录",
+		"startRecording": "开始录制",
+		"stopRecording": "停止录制",
+		"titleLabel": "标题（可选）",
+		"titlePlaceholder": "语音备忘录",
+		"formatLabel": "摘要格式",
+		"failedMicrophone": "无法访问麦克风。请检查权限。",
+		"uploading": "正在上传到 SpeakNotes...",
+		"notAuthenticated": "未认证。请连接您的 SpeakNotes 账户。",
+		"processingTranscription": "正在处理转录...",
+		"creatingNote": "正在库中创建笔记...",
+		"transcriptionFailed": "转录失败",
+		"timeout": "等待转录超时"
+	},
+	"export": {
+		"title": "导出到 SpeakNotes",
+		"descriptionSelected": "将选定文本导出到 SpeakNotes 进行摘要。",
+		"descriptionNote": "将当前笔记导出到 SpeakNotes 进行摘要。",
+		"contentPreview": "内容预览",
+		"noteTitlePlaceholder": "笔记标题",
+		"formatLabel": "摘要格式",
+		"exportButton": "导出到 SpeakNotes",
+		"defaultTitle": "Obsidian 笔记",
+		"cancel": "取消",
+		"unsupportedFileType": "SpeakNotes 处理不支持此文件类型。",
+		"transcribeButton": "使用 SpeakNotes 转录",
+		"bulkExportNotImplemented": "批量导出尚未实现。请使用侧边栏导出单个笔记。",
+		"sendingToSpeakNotes": "正在发送到 SpeakNotes...",
+		"textExportNotImplemented": "文本导出尚未完全实现。请使用 Web 应用。",
+		"readingFile": "正在读取文件...",
+		"uploadingFile": "正在上传到 SpeakNotes...",
+		"unsupportedType": "不支持的文件类型"
+	},
+	"import": {
+		"title": "导入到 SpeakNotes",
+		"contentFormat": "内容格式",
+		"contentFormatDesc": "SpeakNotes 应如何处理此内容？",
+		"targetFolder": "目标文件夹",
+		"targetFolderDesc": "要导入到哪个 SpeakNotes 文件夹",
+		"noFolder": "无文件夹",
+		"importing": "正在导入...",
+		"importButton": "导入到 SpeakNotes",
+		"cancel": "取消",
+		"selectFiles": "选择要导入到 SpeakNotes 的 markdown 文件",
+		"formatForAll": "应用于所有导入笔记的格式",
+		"noFilesFound": "在 SpeakNotes 文件夹外未找到 markdown 文件",
+		"importSelected": "导入所选"
+	},
+	"bulkExport": {
+		"title": "批量导出笔记",
+		"loadingNotes": "正在加载笔记...",
+		"filterByFolder": "按文件夹筛选",
+		"allFolders": "所有文件夹",
+		"filterByStatus": "按状态筛选",
+		"completed": "已完成",
+		"allStatuses": "所有状态",
+		"noNotesFound": "未找到笔记",
+		"exporting": "正在导出...",
+		"exportSelected": "导出所选",
+		"cancel": "取消",
+		"alreadyInVault": "已在库中"
+	},
+	"graph": {
+		"title": "SpeakNotes 关系图视图"
+	},
+	"sync": {
+		"alreadyInProgress": "SpeakNotes：同步已在进行中",
+		"notConnected": "SpeakNotes：未连接。请连接您的账户。",
+		"starting": "SpeakNotes：正在开始同步...",
+		"synced": "SpeakNotes：已同步 {{count}} 篇笔记",
+		"failed": "SpeakNotes：同步失败 - {{message}}"
+	},
+	"backlinks": {
+		"noNewBacklinks": "未找到新的反向链接"
+	},
+	"errors": {
+		"failedToLoadContent": "加载 SpeakNotes 内容失败",
+		"failedToRegister": "注册 Obsidian 集成失败：",
+		"noteNotFound": "未找到笔记",
+		"folderNotFound": "未找到文件夹"
+	},
+	"formats": {
+		"note": "笔记",
+		"transcript": "转录文本",
+		"bulletpoints": "要点列表",
+		"blogPost": "博客文章",
+		"tweetThread": "推文串",
+		"linkedinArticle": "LinkedIn 文章",
+		"meetingNotes": "会议记录",
+		"newsArticle": "新闻文章",
+		"qaFormat": "问答格式",
+		"presentationSlides": "演示文稿幻灯片",
+		"bookSummary": "书籍摘要",
+		"flashCards": "抽认卡",
+		"emailNewsletter": "电子邮件通讯",
+		"videoScript": "视频脚本"
+	},
+	"common": {
+		"close": "关闭",
+		"save": "保存",
+		"delete": "删除",
+		"edit": "编辑",
+		"loading": "加载中...",
+		"error": "错误",
+		"success": "成功"
+	}
+}

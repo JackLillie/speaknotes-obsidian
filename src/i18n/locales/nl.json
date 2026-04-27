@@ -1,0 +1,194 @@
+{
+	"plugin": {
+		"name": "SpeakNotes",
+		"loaded": "SpeakNotes-plugin geladen",
+		"unloaded": "SpeakNotes-plugin uitgeschakeld"
+	},
+	"commands": {
+		"openSidebar": "SpeakNotes-bibliotheek openen",
+		"recordVoiceMemo": "Spraakmemo opnemen",
+		"exportCurrentNote": "Huidige notitie exporteren naar SpeakNotes",
+		"syncLibrary": "SpeakNotes-bibliotheek synchroniseren",
+		"bulkExport": "Notities in bulk exporteren",
+		"importNotes": "Notities importeren naar SpeakNotes",
+		"createBacklinks": "Backlinks maken in SpeakNotes-notities",
+		"openGraphView": "SpeakNotes-grafiekweergave openen",
+		"transcribeWithSpeakNotes": "Transcriberen met SpeakNotes"
+	},
+	"settings": {
+		"title": "SpeakNotes-instellingen",
+		"connection": {
+			"title": "Verbinding",
+			"connectedAccount": "Gekoppeld account",
+			"signedInAs": "Aangemeld als {{email}}",
+			"disconnect": "Verbinding verbreken",
+			"lastSync": "Laatste synchronisatie",
+			"syncNow": "Nu synchroniseren",
+			"connectAccount": "Account koppelen",
+			"connectDesc": "Meld u aan met uw SpeakNotes-account om notities te synchroniseren",
+			"loginButton": "Inloggen met SpeakNotes",
+			"openingLogin": "SpeakNotes-login openen in uw browser...",
+			"disconnected": "Verbinding met SpeakNotes verbroken",
+			"successfullyConnected": "SpeakNotes: Succesvol verbonden!"
+		},
+		"sync": {
+			"title": "Synchronisatie-instellingen",
+			"exportFolder": "Exportmap",
+			"exportFolderDesc": "Map in uw vault waar SpeakNotes worden opgeslagen",
+			"autoSync": "Automatisch synchroniseren",
+			"autoSyncDesc": "Notities automatisch synchroniseren bij het opstarten",
+			"syncInterval": "Synchronisatie-interval",
+			"syncIntervalDesc": "Hoe vaak te synchroniseren in minuten (0 om periodieke synchronisatie uit te schakelen)"
+		},
+		"content": {
+			"title": "Inhoudsinstellingen",
+			"defaultFormat": "Standaard samenvattingsformaat",
+			"defaultFormatDesc": "Standaardformaat voor nieuwe opnames",
+			"includeTranscription": "Volledige transcriptie toevoegen",
+			"includeTranscriptionDesc": "De volledige transcriptie opnemen in geëxporteerde notities",
+			"exportTemplate": "Exportsjabloon",
+			"exportTemplateDesc": "Aangepast Markdown-sjabloon. Beschikbare variabelen: {{id}}, {{title}}, {{created}}, {{updated}}, {{type}}, {{status}}, {{format}}, {{isPinned}}, {{summary}}, {{transcription}}",
+			"templatePlaceholder": "Leeg laten voor standaardsjabloon"
+		},
+		"about": {
+			"title": "Over",
+			"pluginName": "SpeakNotes voor Obsidian",
+			"version": "Versie {{version}}",
+			"visitWebsite": "Website bezoeken",
+			"support": "Ondersteuning",
+			"supportDesc": "Hulp krijgen of problemen melden",
+			"documentation": "Documentatie"
+		}
+	},
+	"sidebar": {
+		"title": "SpeakNotes-bibliotheek",
+		"syncLibrary": "Bibliotheek synchroniseren",
+		"searchPlaceholder": "Notities zoeken...",
+		"allFolders": "Alle mappen",
+		"notConnected": "Niet verbonden met SpeakNotes",
+		"connectAccount": "Account koppelen",
+		"loadingNotes": "Notities laden...",
+		"noMatchingNotes": "Geen overeenkomende notities gevonden",
+		"noNotesYet": "Nog geen notities",
+		"exportToVault": "Exporteren naar vault",
+		"insertIntoNote": "In huidige notitie invoegen",
+		"failedToLoadNotes": "Laden van notities mislukt:",
+		"summary": "Samenvatting",
+		"fullTranscription": "Volledige transcriptie",
+		"exportToVaultButton": "Exporteren naar Vault"
+	},
+	"statusBar": {
+		"syncing": "Synchroniseren...",
+		"synced": "Gesynchroniseerd",
+		"syncError": "Synchronisatiefout",
+		"offline": "Offline",
+		"notConnected": "Niet verbonden"
+	},
+	"recorder": {
+		"title": "Spraakmemo opnemen",
+		"startRecording": "Opname starten",
+		"stopRecording": "Opname stoppen",
+		"titleLabel": "Titel (optioneel)",
+		"titlePlaceholder": "Spraakmemo",
+		"formatLabel": "Formaat samenvatting",
+		"failedMicrophone": "Toegang tot microfoon mislukt. Controleer de machtigingen.",
+		"uploading": "Uploaden naar SpeakNotes...",
+		"notAuthenticated": "Niet geauthenticeerd. Koppel je SpeakNotes-account.",
+		"processingTranscription": "Transcriptie verwerken...",
+		"creatingNote": "Notitie aanmaken in vault...",
+		"transcriptionFailed": "Transcriptie mislukt",
+		"timeout": "Time-out bij het wachten op transcriptie"
+	},
+	"export": {
+		"title": "Exporteren naar SpeakNotes",
+		"descriptionSelected": "Exporteer de geselecteerde tekst naar SpeakNotes voor een samenvatting.",
+		"descriptionNote": "Exporteer de huidige notitie naar SpeakNotes voor een samenvatting.",
+		"contentPreview": "Voorbeeld van inhoud",
+		"noteTitlePlaceholder": "Notitietitel",
+		"formatLabel": "Formaat samenvatting",
+		"exportButton": "Exporteren naar SpeakNotes",
+		"defaultTitle": "Obsidian-notitie",
+		"cancel": "Annuleren",
+		"unsupportedFileType": "Dit bestandstype wordt niet ondersteund voor verwerking door SpeakNotes.",
+		"transcribeButton": "Transcripteren met SpeakNotes",
+		"bulkExportNotImplemented": "Bulkexport is nog niet geïmplementeerd. Gebruik de zijbalk om individuele notities te exporteren.",
+		"sendingToSpeakNotes": "Verzenden naar SpeakNotes...",
+		"textExportNotImplemented": "Tekstexport is nog niet volledig geïmplementeerd. Gebruik de web-app.",
+		"readingFile": "Bestand lezen...",
+		"uploadingFile": "Uploaden naar SpeakNotes...",
+		"unsupportedType": "Niet-ondersteund bestandstype"
+	},
+	"import": {
+		"title": "Importeren naar SpeakNotes",
+		"contentFormat": "Inhoudsformaat",
+		"contentFormatDesc": "Hoe moet SpeakNotes deze inhoud verwerken?",
+		"targetFolder": "Doelmap",
+		"targetFolderDesc": "Naar welke SpeakNotes-map moet worden geïmporteerd",
+		"noFolder": "Geen map",
+		"importing": "Importeren...",
+		"importButton": "Importeren naar SpeakNotes",
+		"cancel": "Annuleren",
+		"selectFiles": "Selecteer markdown-bestanden om naar SpeakNotes te importeren",
+		"formatForAll": "Formaat om toe te passen op alle geïmporteerde notities",
+		"noFilesFound": "Geen markdown-bestanden gevonden buiten de SpeakNotes-map",
+		"importSelected": "Geselecteerde importeren"
+	},
+	"bulkExport": {
+		"title": "Notities in bulk exporteren",
+		"loadingNotes": "Notities laden...",
+		"filterByFolder": "Filteren op map",
+		"allFolders": "Alle mappen",
+		"filterByStatus": "Filteren op status",
+		"completed": "Voltooid",
+		"allStatuses": "Alle statussen",
+		"noNotesFound": "Geen notities gevonden",
+		"exporting": "Exporteren...",
+		"exportSelected": "Geselecteerde exporteren",
+		"cancel": "Annuleren",
+		"alreadyInVault": "Al in kluis"
+	},
+	"graph": {
+		"title": "SpeakNotes Grafiekweergave"
+	},
+	"sync": {
+		"alreadyInProgress": "SpeakNotes: Synchronisatie is al bezig",
+		"notConnected": "SpeakNotes: Niet verbonden. Verbind uw account.",
+		"starting": "SpeakNotes: Synchronisatie starten...",
+		"synced": "SpeakNotes: {{count}} notities gesynchroniseerd",
+		"failed": "SpeakNotes: Synchronisatie mislukt - {{message}}"
+	},
+	"backlinks": {
+		"noNewBacklinks": "Geen nieuwe backlinks gevonden"
+	},
+	"errors": {
+		"failedToLoadContent": "Laden van SpeakNotes-inhoud mislukt",
+		"failedToRegister": "Registratie van Obsidian-integratie mislukt:",
+		"noteNotFound": "Notitie niet gevonden",
+		"folderNotFound": "Map niet gevonden"
+	},
+	"formats": {
+		"note": "Notitie",
+		"transcript": "Transcriptie",
+		"bulletpoints": "Opsommingstekens",
+		"blogPost": "Blogbericht",
+		"tweetThread": "Tweet-thread",
+		"linkedinArticle": "LinkedIn-artikel",
+		"meetingNotes": "Vergaderingsnotities",
+		"newsArticle": "Nieuwsartikel",
+		"qaFormat": "Vraag-en-antwoordformaat",
+		"presentationSlides": "Presentatiedia's",
+		"bookSummary": "Boeksamenvatting",
+		"flashCards": "Flashcards",
+		"emailNewsletter": "E-mailnieuwsbrief",
+		"videoScript": "Videoscript"
+	},
+	"common": {
+		"close": "Sluiten",
+		"save": "Opslaan",
+		"delete": "Verwijderen",
+		"edit": "Bewerken",
+		"loading": "Laden...",
+		"error": "Fout",
+		"success": "Succes"
+	}
+}

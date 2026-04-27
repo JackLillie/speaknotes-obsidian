@@ -1,0 +1,10 @@
+{
+	"id": "speaknotes",
+	"name": "SpeakNotes",
+	"version": "1.0.0",
+	"minAppVersion": "1.5.0",
+	"description": "Transcribe and summarize audio content directly in Obsidian. Record voice memos, import audio files, and sync with your SpeakNotes library.",
+	"author": "SpeakNotes",
+	"authorUrl": "https://speaknotes.io",
+	"isDesktopOnly": false
+}

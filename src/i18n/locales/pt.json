@@ -1,0 +1,194 @@
+{
+	"plugin": {
+		"name": "SpeakNotes",
+		"loaded": "Plugin SpeakNotes carregado",
+		"unloaded": "Plugin SpeakNotes descarregado"
+	},
+	"commands": {
+		"openSidebar": "Abrir Biblioteca SpeakNotes",
+		"recordVoiceMemo": "Gravar Memorando de Voz",
+		"exportCurrentNote": "Exportar Nota Atual para o SpeakNotes",
+		"syncLibrary": "Sincronizar Biblioteca SpeakNotes",
+		"bulkExport": "Exportar Notas em Massa",
+		"importNotes": "Importar Notas para o SpeakNotes",
+		"createBacklinks": "Criar Backlinks em Notas do SpeakNotes",
+		"openGraphView": "Abrir Visualização de Gráfico do SpeakNotes",
+		"transcribeWithSpeakNotes": "Transcrever com SpeakNotes"
+	},
+	"settings": {
+		"title": "Configurações do SpeakNotes",
+		"connection": {
+			"title": "Conexão",
+			"connectedAccount": "Conta Conectada",
+			"signedInAs": "Conectado como {{email}}",
+			"disconnect": "Desconectar",
+			"lastSync": "Última Sincronização",
+			"syncNow": "Sincronizar Agora",
+			"connectAccount": "Conectar Conta",
+			"connectDesc": "Entre com sua conta SpeakNotes para sincronizar notas",
+			"loginButton": "Entrar com SpeakNotes",
+			"openingLogin": "Abrindo login do SpeakNotes no seu navegador...",
+			"disconnected": "Desconectado do SpeakNotes",
+			"successfullyConnected": "SpeakNotes: Conectado com sucesso!"
+		},
+		"sync": {
+			"title": "Configurações de Sincronização",
+			"exportFolder": "Pasta de Exportação",
+			"exportFolderDesc": "Pasta no seu vault onde as notas do SpeakNotes serão salvas",
+			"autoSync": "Sincronização Automática",
+			"autoSyncDesc": "Sincronizar notas automaticamente ao iniciar",
+			"syncInterval": "Intervalo de Sincronização",
+			"syncIntervalDesc": "Frequência de sincronização em minutos (0 para desativar a sincronização periódica)"
+		},
+		"content": {
+			"title": "Configurações de Conteúdo",
+			"defaultFormat": "Formato de Resumo Padrão",
+			"defaultFormatDesc": "Formato padrão para novas gravações",
+			"includeTranscription": "Incluir Transcrição Completa",
+			"includeTranscriptionDesc": "Incluir a transcrição completa nas notas exportadas",
+			"exportTemplate": "Modelo de Exportação",
+			"exportTemplateDesc": "Modelo Markdown personalizado. Variáveis disponíveis: {{id}}, {{title}}, {{created}}, {{updated}}, {{type}}, {{status}}, {{format}}, {{isPinned}}, {{summary}}, {{transcription}}",
+			"templatePlaceholder": "Deixe vazio para o modelo padrão"
+		},
+		"about": {
+			"title": "Sobre",
+			"pluginName": "SpeakNotes para Obsidian",
+			"version": "Versão {{version}}",
+			"visitWebsite": "Visitar Website",
+			"support": "Suporte",
+			"supportDesc": "Obtenha ajuda ou relate problemas",
+			"documentation": "Documentação"
+		}
+	},
+	"sidebar": {
+		"title": "Biblioteca SpeakNotes",
+		"syncLibrary": "Sincronizar biblioteca",
+		"searchPlaceholder": "Pesquisar notas...",
+		"allFolders": "Todas as Pastas",
+		"notConnected": "Não conectado ao SpeakNotes",
+		"connectAccount": "Conectar Conta",
+		"loadingNotes": "Carregando notas...",
+		"noMatchingNotes": "Nenhuma nota correspondente encontrada",
+		"noNotesYet": "Ainda não há notas",
+		"exportToVault": "Exportar para o cofre",
+		"insertIntoNote": "Inserir na nota atual",
+		"failedToLoadNotes": "Falha ao carregar notas:",
+		"summary": "Resumo",
+		"fullTranscription": "Transcrição Completa",
+		"exportToVaultButton": "Exportar para o Cofre"
+	},
+	"statusBar": {
+		"syncing": "Sincronizando...",
+		"synced": "Sincronizado",
+		"syncError": "Erro de sincronização",
+		"offline": "Desconectado",
+		"notConnected": "Não conectado"
+	},
+	"recorder": {
+		"title": "Gravar Memorando de Voz",
+		"startRecording": "Iniciar Gravação",
+		"stopRecording": "Parar Gravação",
+		"titleLabel": "Título (opcional)",
+		"titlePlaceholder": "Memorando de Voz",
+		"formatLabel": "Formato do Resumo",
+		"failedMicrophone": "Falha ao acessar o microfone. Verifique as permissões.",
+		"uploading": "Enviando para o SpeakNotes...",
+		"notAuthenticated": "Não autenticado. Conecte sua conta do SpeakNotes.",
+		"processingTranscription": "Processando transcrição...",
+		"creatingNote": "Criando nota no cofre...",
+		"transcriptionFailed": "Falha na transcrição",
+		"timeout": "Tempo esgotado aguardando a transcrição"
+	},
+	"export": {
+		"title": "Exportar para o SpeakNotes",
+		"descriptionSelected": "Exportar o texto selecionado para o SpeakNotes para resumir.",
+		"descriptionNote": "Exportar a nota atual para o SpeakNotes para resumir.",
+		"contentPreview": "Pré-visualização do Conteúdo",
+		"noteTitlePlaceholder": "Título da nota",
+		"formatLabel": "Formato do Resumo",
+		"exportButton": "Exportar para o SpeakNotes",
+		"defaultTitle": "Nota do Obsidian",
+		"cancel": "Cancelar",
+		"unsupportedFileType": "Este tipo de arquivo não é suportado para processamento no SpeakNotes.",
+		"transcribeButton": "Transcrever com o SpeakNotes",
+		"bulkExportNotImplemented": "A exportação em massa ainda não foi implementada. Use a barra lateral para exportar notas individuais.",
+		"sendingToSpeakNotes": "Enviando para o SpeakNotes...",
+		"textExportNotImplemented": "A exportação de texto ainda não foi totalmente implementada. Use o aplicativo web.",
+		"readingFile": "Lendo arquivo...",
+		"uploadingFile": "Enviando para o SpeakNotes...",
+		"unsupportedType": "Tipo de arquivo não suportado"
+	},
+	"import": {
+		"title": "Importar para o SpeakNotes",
+		"contentFormat": "Formato do Conteúdo",
+		"contentFormatDesc": "Como o SpeakNotes deve processar este conteúdo?",
+		"targetFolder": "Pasta de Destino",
+		"targetFolderDesc": "Para qual pasta do SpeakNotes importar",
+		"noFolder": "Nenhuma Pasta",
+		"importing": "Importando...",
+		"importButton": "Importar para o SpeakNotes",
+		"cancel": "Cancelar",
+		"selectFiles": "Selecione arquivos markdown para importar para o SpeakNotes",
+		"formatForAll": "Formato a ser aplicado a todas as notas importadas",
+		"noFilesFound": "Nenhum arquivo markdown encontrado fora da pasta do SpeakNotes",
+		"importSelected": "Importar Selecionados"
+	},
+	"bulkExport": {
+		"title": "Exportação de Notas em Massa",
+		"loadingNotes": "Carregando notas...",
+		"filterByFolder": "Filtrar por pasta",
+		"allFolders": "Todas as Pastas",
+		"filterByStatus": "Filtrar por status",
+		"completed": "Concluído",
+		"allStatuses": "Todos os Status",
+		"noNotesFound": "Nenhuma nota encontrada",
+		"exporting": "Exportando...",
+		"exportSelected": "Exportar Selecionados",
+		"cancel": "Cancelar",
+		"alreadyInVault": "Já está no cofre"
+	},
+	"graph": {
+		"title": "Visualização em Grafo do SpeakNotes"
+	},
+	"sync": {
+		"alreadyInProgress": "SpeakNotes: Sincronização já em andamento",
+		"notConnected": "SpeakNotes: Não conectado. Por favor, conecte sua conta.",
+		"starting": "SpeakNotes: Iniciando sincronização...",
+		"synced": "SpeakNotes: {{count}} notas sincronizadas",
+		"failed": "SpeakNotes: Falha na sincronização - {{message}}"
+	},
+	"backlinks": {
+		"noNewBacklinks": "Nenhum novo backlink encontrado"
+	},
+	"errors": {
+		"failedToLoadContent": "Falha ao carregar o conteúdo do SpeakNotes",
+		"failedToRegister": "Falha ao registrar a integração com o Obsidian:",
+		"noteNotFound": "Nota não encontrada",
+		"folderNotFound": "Pasta não encontrada"
+	},
+	"formats": {
+		"note": "Nota",
+		"transcript": "Transcrição",
+		"bulletpoints": "Tópicos",
+		"blogPost": "Post de Blog",
+		"tweetThread": "Thread do Twitter",
+		"linkedinArticle": "Artigo do LinkedIn",
+		"meetingNotes": "Notas de Reunião",
+		"newsArticle": "Artigo de Notícias",
+		"qaFormat": "Formato de Perguntas e Respostas",
+		"presentationSlides": "Slides de Apresentação",
+		"bookSummary": "Resumo de Livro",
+		"flashCards": "Flashcards",
+		"emailNewsletter": "Newsletter por E-mail",
+		"videoScript": "Roteiro de Vídeo"
+	},
+	"common": {
+		"close": "Fechar",
+		"save": "Salvar",
+		"delete": "Excluir",
+		"edit": "Editar",
+		"loading": "Carregando...",
+		"error": "Erro",
+		"success": "Sucesso"
+	}
+}

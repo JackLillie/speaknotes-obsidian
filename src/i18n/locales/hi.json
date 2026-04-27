@@ -1,0 +1,194 @@
+{
+	"plugin": {
+		"name": "SpeakNotes",
+		"loaded": "SpeakNotes प्लगइन लोड हो गया",
+		"unloaded": "SpeakNotes प्लगइन अनलोड हो गया"
+	},
+	"commands": {
+		"openSidebar": "SpeakNotes लाइब्रेरी खोलें",
+		"recordVoiceMemo": "वॉयस मेमो रिकॉर्ड करें",
+		"exportCurrentNote": "वर्तमान नोट को SpeakNotes में एक्सपोर्ट करें",
+		"syncLibrary": "SpeakNotes लाइब्रेरी सिंक करें",
+		"bulkExport": "नोट्स को बल्क में एक्सपोर्ट करें",
+		"importNotes": "SpeakNotes में नोट्स इम्पोर्ट करें",
+		"createBacklinks": "SpeakNotes नोट्स में बैकलिंक्स बनाएं",
+		"openGraphView": "SpeakNotes ग्राफ़ व्यू खोलें",
+		"transcribeWithSpeakNotes": "SpeakNotes के साथ ट्रांसक्राइब करें"
+	},
+	"settings": {
+		"title": "SpeakNotes सेटिंग्स",
+		"connection": {
+			"title": "कनेक्शन",
+			"connectedAccount": "जुड़ा हुआ खाता",
+			"signedInAs": "{{email}} के रूप में साइन इन किया गया",
+			"disconnect": "डिस्कनेक्ट करें",
+			"lastSync": "पिछला सिंक",
+			"syncNow": "अभी सिंक करें",
+			"connectAccount": "खाता जोड़ें",
+			"connectDesc": "नोट्स सिंक करने के लिए अपने SpeakNotes खाते से साइन इन करें",
+			"loginButton": "SpeakNotes के साथ लॉगिन करें",
+			"openingLogin": "आपके ब्राउज़र में SpeakNotes लॉगिन खुल रहा है...",
+			"disconnected": "SpeakNotes से डिस्कनेक्ट हो गया",
+			"successfullyConnected": "SpeakNotes: सफलतापूर्वक जुड़ गया!"
+		},
+		"sync": {
+			"title": "सिंक सेटिंग्स",
+			"exportFolder": "एक्सपोर्ट फ़ोल्डर",
+			"exportFolderDesc": "आपके वॉल्ट में वह फ़ोल्डर जहाँ SpeakNotes सहेजे जाएंगे",
+			"autoSync": "ऑटो सिंक",
+			"autoSyncDesc": "स्टार्टअप पर नोट्स को स्वचालित रूप से सिंक करें",
+			"syncInterval": "सिंक अंतराल",
+			"syncIntervalDesc": "मिनटों में सिंक करने की आवृत्ति (समय-समय पर सिंक को अक्षम करने के लिए 0)"
+		},
+		"content": {
+			"title": "सामग्री सेटिंग्स",
+			"defaultFormat": "डिफ़ॉल्ट सारांश प्रारूप",
+			"defaultFormatDesc": "नई रिकॉर्डिंग के लिए डिफ़ॉल्ट प्रारूप",
+			"includeTranscription": "पूर्ण ट्रांसक्रिप्शन शामिल करें",
+			"includeTranscriptionDesc": "एक्सपोर्ट किए गए नोट्स में पूर्ण ट्रांसक्रिप्शन शामिल करें",
+			"exportTemplate": "एक्सपोर्ट टेम्पलेट",
+			"exportTemplateDesc": "कस्टम Markdown टेम्पलेट। उपलब्ध वेरिएबल्स: {{id}}, {{title}}, {{created}}, {{updated}}, {{type}}, {{status}}, {{format}}, {{isPinned}}, {{summary}}, {{transcription}}",
+			"templatePlaceholder": "डिफ़ॉल्ट टेम्पलेट के लिए खाली छोड़ दें"
+		},
+		"about": {
+			"title": "के बारे में",
+			"pluginName": "Obsidian के लिए SpeakNotes",
+			"version": "वर्जन {{version}}",
+			"visitWebsite": "वेबसाइट पर जाएं",
+			"support": "सहायता",
+			"supportDesc": "सहायता प्राप्त करें या समस्याओं की रिपोर्ट करें",
+			"documentation": "दस्तावेज़ीकरण"
+		}
+	},
+	"sidebar": {
+		"title": "SpeakNotes लाइब्रेरी",
+		"syncLibrary": "लाइब्रेरी सिंक करें",
+		"searchPlaceholder": "नोट्स खोजें...",
+		"allFolders": "सभी फ़ोल्डर",
+		"notConnected": "SpeakNotes से कनेक्ट नहीं है",
+		"connectAccount": "खाता कनेक्ट करें",
+		"loadingNotes": "नोट्स लोड हो रहे हैं...",
+		"noMatchingNotes": "कोई मेल खाने वाले नोट्स नहीं मिले",
+		"noNotesYet": "अभी तक कोई नोट्स नहीं हैं",
+		"exportToVault": "वॉल्ट में एक्सपोर्ट करें",
+		"insertIntoNote": "वर्तमान नोट में डालें",
+		"failedToLoadNotes": "नोट्स लोड करने में विफल:",
+		"summary": "सारांश",
+		"fullTranscription": "पूर्ण ट्रांसक्रिप्शन",
+		"exportToVaultButton": "वॉल्ट में एक्सपोर्ट करें"
+	},
+	"statusBar": {
+		"syncing": "सिंक हो रहा है...",
+		"synced": "सिंक हो गया",
+		"syncError": "सिंक त्रुटि",
+		"offline": "ऑफलाइन",
+		"notConnected": "कनेक्ट नहीं है"
+	},
+	"recorder": {
+		"title": "वॉयस मेमो रिकॉर्ड करें",
+		"startRecording": "रिकॉर्डिंग शुरू करें",
+		"stopRecording": "रिकॉर्डिंग रोकें",
+		"titleLabel": "शीर्षक (वैकल्पिक)",
+		"titlePlaceholder": "वॉयस मेमो",
+		"formatLabel": "सारांश प्रारूप",
+		"failedMicrophone": "माइक्रोफ़ोन तक पहुँचने में विफल। कृपया अनुमतियाँ जाँचें।",
+		"uploading": "SpeakNotes पर अपलोड हो रहा है...",
+		"notAuthenticated": "प्रमाणित नहीं है। कृपया अपना SpeakNotes खाता कनेक्ट करें।",
+		"processingTranscription": "ट्रांसक्रिप्शन प्रोसेस हो रहा है...",
+		"creatingNote": "वॉल्ट में नोट बनाया जा रहा है...",
+		"transcriptionFailed": "ट्रांसक्रिप्शन विफल रहा",
+		"timeout": "ट्रांसक्रिप्शन की प्रतीक्षा में समय समाप्त"
+	},
+	"export": {
+		"title": "SpeakNotes में एक्सपोर्ट करें",
+		"descriptionSelected": "सारांश के लिए चयनित टेक्स्ट को SpeakNotes में एक्सपोर्ट करें।",
+		"descriptionNote": "सारांश के लिए वर्तमान नोट को SpeakNotes में एक्सपोर्ट करें।",
+		"contentPreview": "सामग्री पूर्वावलोकन",
+		"noteTitlePlaceholder": "नोट शीर्षक",
+		"formatLabel": "सारांश प्रारूप",
+		"exportButton": "SpeakNotes में एक्सपोर्ट करें",
+		"defaultTitle": "Obsidian नोट",
+		"cancel": "रद्द करें",
+		"unsupportedFileType": "यह फ़ाइल प्रकार SpeakNotes प्रोसेसिंग के लिए समर्थित नहीं है।",
+		"transcribeButton": "SpeakNotes के साथ ट्रांसक्राइब करें",
+		"bulkExportNotImplemented": "बल्क एक्सपोर्ट अभी लागू नहीं किया गया है। व्यक्तिगत नोट्स एक्सपोर्ट करने के लिए साइडबार का उपयोग करें।",
+		"sendingToSpeakNotes": "SpeakNotes को भेजा जा रहा है...",
+		"textExportNotImplemented": "टेक्स्ट एक्सपोर्ट अभी पूरी तरह से लागू नहीं हुआ है। कृपया वेब ऐप का उपयोग करें।",
+		"readingFile": "फ़ाइल पढ़ी जा रही है...",
+		"uploadingFile": "SpeakNotes पर अपलोड हो रहा है...",
+		"unsupportedType": "असमर्थित फ़ाइल प्रकार"
+	},
+	"import": {
+		"title": "इम्पोर्ट करें SpeakNotes में",
+		"contentFormat": "सामग्री प्रारूप",
+		"contentFormatDesc": "SpeakNotes को इस सामग्री को कैसे प्रोसेस करना चाहिए?",
+		"targetFolder": "लक्ष्य फ़ोल्डर",
+		"targetFolderDesc": "किस SpeakNotes फ़ोल्डर में आयात करना है",
+		"noFolder": "कोई फ़ोल्डर नहीं",
+		"importing": "आयात किया जा रहा है...",
+		"importButton": "SpeakNotes में आयात करें",
+		"cancel": "रद्द करें",
+		"selectFiles": "SpeakNotes में आयात करने के लिए मार्कडाउन फ़ाइलें चुनें",
+		"formatForAll": "सभी आयातित नोट्स पर लागू करने के लिए प्रारूप",
+		"noFilesFound": "SpeakNotes फ़ोल्डर के बाहर कोई मार्कडाउन फ़ाइल नहीं मिली",
+		"importSelected": "चयनित आयात करें"
+	},
+	"bulkExport": {
+		"title": "नोट्स का बल्क एक्सपोर्ट",
+		"loadingNotes": "नोट्स लोड हो रहे हैं...",
+		"filterByFolder": "फ़ोल्डर द्वारा फ़िल्टर करें",
+		"allFolders": "सभी फ़ोल्डर",
+		"filterByStatus": "स्थिति द्वारा फ़िल्टर करें",
+		"completed": "पूरा हुआ",
+		"allStatuses": "सभी स्थितियाँ",
+		"noNotesFound": "कोई नोट नहीं मिला",
+		"exporting": "एक्सपोर्ट किया जा रहा है...",
+		"exportSelected": "चयनित एक्सपोर्ट करें",
+		"cancel": "रद्द करें",
+		"alreadyInVault": "पहले से वॉल्ट में है"
+	},
+	"graph": {
+		"title": "SpeakNotes ग्राफ़ व्यू"
+	},
+	"sync": {
+		"alreadyInProgress": "SpeakNotes: सिंक पहले से ही प्रगति पर है",
+		"notConnected": "SpeakNotes: कनेक्ट नहीं है। कृपया अपना खाता कनेक्ट करें।",
+		"starting": "SpeakNotes: सिंक शुरू हो रहा है...",
+		"synced": "SpeakNotes: {{count}} नोट्स सिंक किए गए",
+		"failed": "SpeakNotes: सिंक विफल रहा - {{message}}"
+	},
+	"backlinks": {
+		"noNewBacklinks": "कोई नया बैकलिंक नहीं मिला"
+	},
+	"errors": {
+		"failedToLoadContent": "SpeakNotes सामग्री लोड करने में विफल",
+		"failedToRegister": "Obsidian एकीकरण पंजीकृत करने में विफल:",
+		"noteNotFound": "नोट नहीं मिला",
+		"folderNotFound": "फ़ोल्डर नहीं मिला"
+	},
+	"formats": {
+		"note": "नोट",
+		"transcript": "ट्रांसक्रिप्ट",
+		"bulletpoints": "बुलेट पॉइंट्स",
+		"blogPost": "ब्लॉग पोस्ट",
+		"tweetThread": "ट्वीट थ्रेड",
+		"linkedinArticle": "LinkedIn लेख",
+		"meetingNotes": "मीटिंग नोट्स",
+		"newsArticle": "समाचार लेख",
+		"qaFormat": "प्रश्न-उत्तर प्रारूप",
+		"presentationSlides": "प्रेजेंटेशन स्लाइड्स",
+		"bookSummary": "पुस्तक सारांश",
+		"flashCards": "फ़्लैश कार्ड",
+		"emailNewsletter": "ईमेल न्यूज़लेटर",
+		"videoScript": "वीडियो स्क्रिप्ट"
+	},
+	"common": {
+		"close": "बंद करें",
+		"save": "सहेजें",
+		"delete": "हटाएं",
+		"edit": "संपादित करें",
+		"loading": "लोड हो रहा है...",
+		"error": "त्रुटि",
+		"success": "सफलता"
+	}
+}

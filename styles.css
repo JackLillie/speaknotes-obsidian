@@ -1,0 +1,807 @@
+/* SpeakNotes Plugin Styles */
+
+/* Status Bar */
+.speaknotes-status-bar {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	cursor: pointer;
+	padding: 0 4px;
+}
+
+.speaknotes-status-bar:hover {
+	color: var(--text-normal);
+}
+
+.speaknotes-status-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+}
+
+.speaknotes-status-icon svg {
+	display: block;
+}
+
+.speaknotes-status-text {
+	line-height: 1;
+}
+
+.speaknotes-status-syncing svg {
+	animation: speaknotes-spin 1s linear infinite;
+}
+
+.speaknotes-status-success {
+	color: var(--color-green);
+}
+
+.speaknotes-status-error {
+	color: var(--color-red);
+}
+
+.speaknotes-status-offline {
+	color: var(--text-muted);
+}
+
+@keyframes speaknotes-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* Sidebar */
+.speaknotes-sidebar {
+	padding: 10px;
+}
+
+.speaknotes-sidebar-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+.speaknotes-sidebar-header h4 {
+	margin: 0;
+}
+
+.speaknotes-sync-btn {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 4px;
+	border-radius: 4px;
+}
+
+.speaknotes-sync-btn:hover {
+	background: var(--background-modifier-hover);
+}
+
+/* Search */
+.speaknotes-search-container {
+	margin-bottom: 10px;
+}
+
+.speaknotes-search-input {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 4px;
+	background: var(--background-primary);
+	color: var(--text-normal);
+}
+
+/* Folder filter */
+.speaknotes-folder-filter {
+	margin-bottom: 10px;
+}
+
+.speaknotes-folder-select {
+	width: 100%;
+	padding: 6px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 4px;
+	background: var(--background-primary);
+	color: var(--text-normal);
+}
+
+/* Notes list */
+.speaknotes-notes-list {
+	max-height: calc(100vh - 200px);
+	overflow-y: auto;
+}
+
+.speaknotes-loading,
+.speaknotes-empty {
+	padding: 20px;
+	text-align: center;
+	color: var(--text-muted);
+}
+
+/* Note item */
+.speaknotes-note-item {
+	display: flex;
+	align-items: flex-start;
+	padding: 10px;
+	border-radius: 6px;
+	cursor: pointer;
+	margin-bottom: 4px;
+	transition: background-color 0.15s ease;
+}
+
+.speaknotes-note-item:hover {
+	background: var(--background-modifier-hover);
+}
+
+.speaknotes-note-icon {
+	margin-right: 10px;
+	color: var(--text-muted);
+}
+
+.speaknotes-note-content {
+	flex: 1;
+	min-width: 0;
+}
+
+.speaknotes-note-title {
+	font-weight: 500;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.speaknotes-note-meta {
+	display: flex;
+	gap: 8px;
+	font-size: 0.85em;
+	color: var(--text-muted);
+	margin-top: 2px;
+}
+
+.speaknotes-note-status {
+	padding: 1px 6px;
+	border-radius: 3px;
+	font-size: 0.8em;
+}
+
+.speaknotes-status-summarizing {
+	background: var(--color-yellow);
+	color: var(--text-on-accent);
+}
+
+.speaknotes-status-error {
+	background: var(--color-red);
+	color: var(--text-on-accent);
+}
+
+.speaknotes-note-actions {
+	display: flex;
+	gap: 4px;
+	opacity: 0;
+	transition: opacity 0.15s ease;
+}
+
+.speaknotes-note-item:hover .speaknotes-note-actions {
+	opacity: 1;
+}
+
+.speaknotes-action-btn {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 4px;
+	border-radius: 4px;
+	color: var(--text-muted);
+}
+
+.speaknotes-action-btn:hover {
+	background: var(--background-modifier-hover);
+	color: var(--text-normal);
+}
+
+/* Status disconnected */
+.speaknotes-status-disconnected {
+	padding: 20px;
+	text-align: center;
+	color: var(--text-muted);
+}
+
+/* Recorder Modal */
+.speaknotes-recorder-modal {
+	padding: 20px;
+}
+
+.speaknotes-waveform {
+	width: 100%;
+	height: 100px;
+	background: var(--background-secondary);
+	border-radius: 8px;
+	margin-bottom: 10px;
+}
+
+.speaknotes-timer {
+	text-align: center;
+	font-size: 2em;
+	font-weight: 600;
+	font-variant-numeric: tabular-nums;
+	margin-bottom: 20px;
+}
+
+.speaknotes-controls {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
+.speaknotes-record-btn {
+	padding: 12px 24px;
+	font-size: 1.1em;
+	border-radius: 24px;
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+	border: none;
+	cursor: pointer;
+	transition: all 0.15s ease;
+}
+
+.speaknotes-record-btn:hover {
+	background: var(--interactive-accent-hover);
+}
+
+.speaknotes-record-btn.recording {
+	background: var(--color-red);
+	animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.7;
+	}
+}
+
+.speaknotes-input-group {
+	margin-bottom: 15px;
+}
+
+.speaknotes-input-group label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: 500;
+}
+
+.speaknotes-title-input,
+.speaknotes-format-select {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 4px;
+	background: var(--background-primary);
+	color: var(--text-normal);
+}
+
+/* Processing state */
+.speaknotes-processing {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 40px;
+}
+
+.speaknotes-spinner {
+	width: 40px;
+	height: 40px;
+	border: 3px solid var(--background-modifier-border);
+	border-top-color: var(--interactive-accent);
+	border-radius: 50%;
+	animation: spin 1s linear infinite;
+	margin-bottom: 16px;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.speaknotes-processing-status {
+	color: var(--text-muted);
+}
+
+.speaknotes-error {
+	text-align: center;
+	padding: 20px;
+}
+
+.speaknotes-error h3 {
+	color: var(--color-red);
+}
+
+/* Preview Modal */
+.speaknotes-preview-modal {
+	padding: 20px;
+	max-height: 80vh;
+	overflow-y: auto;
+}
+
+.speaknotes-preview-meta {
+	display: flex;
+	gap: 16px;
+	color: var(--text-muted);
+	margin-bottom: 20px;
+}
+
+.speaknotes-preview-summary {
+	background: var(--background-secondary);
+	padding: 16px;
+	border-radius: 8px;
+	margin-bottom: 20px;
+	white-space: pre-wrap;
+}
+
+.speaknotes-preview-transcript {
+	margin-bottom: 20px;
+}
+
+.speaknotes-preview-transcript summary {
+	cursor: pointer;
+	font-weight: 500;
+	padding: 8px;
+	background: var(--background-secondary);
+	border-radius: 4px;
+}
+
+.speaknotes-preview-transcript > div {
+	padding: 16px;
+	background: var(--background-secondary);
+	border-radius: 0 0 8px 8px;
+	margin-top: -4px;
+	white-space: pre-wrap;
+}
+
+.speaknotes-preview-actions {
+	display: flex;
+	gap: 10px;
+	justify-content: flex-end;
+}
+
+/* Export Modal */
+.speaknotes-export-modal {
+	padding: 20px;
+}
+
+.speaknotes-export-preview {
+	margin-bottom: 20px;
+}
+
+.speaknotes-export-preview-content {
+	background: var(--background-secondary);
+	padding: 12px;
+	border-radius: 6px;
+	max-height: 150px;
+	overflow-y: auto;
+	font-size: 0.9em;
+	color: var(--text-muted);
+}
+
+.speaknotes-file-info {
+	background: var(--background-secondary);
+	padding: 12px;
+	border-radius: 6px;
+	margin-bottom: 20px;
+}
+
+.speaknotes-file-name {
+	font-weight: 500;
+}
+
+.speaknotes-file-size {
+	color: var(--text-muted);
+	font-size: 0.9em;
+}
+
+.speaknotes-export-actions {
+	display: flex;
+	gap: 10px;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
+
+/* Embed */
+.speaknotes-embed {
+	background: var(--background-secondary);
+	padding: 16px;
+	border-radius: 8px;
+	border-left: 3px solid var(--interactive-accent);
+}
+
+.speaknotes-embed h4 {
+	margin: 0 0 8px 0;
+}
+
+.speaknotes-embed p {
+	margin: 0;
+	color: var(--text-muted);
+}
+
+.speaknotes-embed-meta {
+	margin-top: 8px;
+	font-size: 0.85em;
+	color: var(--text-faint);
+}
+
+.speaknotes-embed-error {
+	background: var(--background-secondary);
+	padding: 16px;
+	border-radius: 8px;
+	border-left: 3px solid var(--color-red);
+	color: var(--text-muted);
+}
+
+/* ========================================
+   Bulk Export Modal
+   ======================================== */
+.speaknotes-bulk-export-modal {
+	padding: 20px;
+	min-width: 500px;
+}
+
+.speaknotes-bulk-export-modal h2 {
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+.speaknotes-bulk-filters {
+	margin-bottom: 20px;
+	padding-bottom: 16px;
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+
+/* Remove default borders between settings in filter section */
+.speaknotes-bulk-filters .setting-item {
+	border-top: none;
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+
+.speaknotes-bulk-filters .setting-item:first-child {
+	padding-top: 0;
+}
+
+.speaknotes-bulk-filters .setting-item:last-child {
+	padding-bottom: 0;
+}
+
+.speaknotes-select-all {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 12px 14px;
+	background: var(--background-secondary);
+	border-radius: 6px;
+	margin-bottom: 12px;
+}
+
+.speaknotes-select-all input[type="checkbox"] {
+	width: 16px;
+	height: 16px;
+	margin: 0;
+	cursor: pointer;
+}
+
+.speaknotes-select-all label {
+	cursor: pointer;
+	user-select: none;
+	font-weight: 500;
+}
+
+.speaknotes-bulk-list {
+	max-height: 300px;
+	overflow-y: auto;
+	margin-bottom: 20px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 6px;
+}
+
+/* Empty state in bulk list */
+.speaknotes-bulk-list .speaknotes-empty {
+	padding: 40px 20px;
+	margin: 0;
+}
+
+.speaknotes-bulk-item {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 14px;
+	border-bottom: 1px solid var(--background-modifier-border);
+	transition: background-color 0.15s ease;
+}
+
+.speaknotes-bulk-item:last-child {
+	border-bottom: none;
+}
+
+.speaknotes-bulk-item:hover {
+	background: var(--background-modifier-hover);
+}
+
+.speaknotes-bulk-item input[type="checkbox"] {
+	flex-shrink: 0;
+	width: 16px;
+	height: 16px;
+	margin: 0;
+	cursor: pointer;
+}
+
+.speaknotes-bulk-item label {
+	flex: 1;
+	min-width: 0;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.speaknotes-bulk-item-title {
+	font-weight: 500;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: var(--text-normal);
+}
+
+.speaknotes-bulk-item-meta {
+	font-size: 0.85em;
+	color: var(--text-muted);
+}
+
+.speaknotes-bulk-item-exists {
+	flex-shrink: 0;
+	font-size: 0.75em;
+	color: var(--text-muted);
+	background: var(--background-modifier-success);
+	padding: 3px 8px;
+	border-radius: 4px;
+}
+
+.speaknotes-bulk-actions {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 12px;
+	padding-top: 16px;
+	border-top: 1px solid var(--background-modifier-border);
+}
+
+.speaknotes-bulk-actions .speaknotes-selection-count {
+	margin-right: auto;
+}
+
+.speaknotes-selection-count {
+	color: var(--text-muted);
+	font-size: 0.9em;
+}
+
+/* ========================================
+   Import Modal
+   ======================================== */
+.speaknotes-import-modal {
+	padding: 20px;
+	min-width: 500px;
+}
+
+.speaknotes-import-desc {
+	color: var(--text-muted);
+	margin-bottom: 16px;
+}
+
+.speaknotes-import-file-info {
+	background: var(--background-secondary);
+	padding: 12px 16px;
+	border-radius: 6px;
+	margin-bottom: 16px;
+}
+
+.speaknotes-import-file-info p {
+	margin: 0;
+}
+
+.speaknotes-file-path {
+	font-size: 0.85em;
+	color: var(--text-muted);
+	margin-top: 4px;
+	word-break: break-all;
+}
+
+.speaknotes-import-list {
+	margin-top: 16px;
+}
+
+.speaknotes-import-files {
+	max-height: 250px;
+	overflow-y: auto;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 6px;
+	margin-top: 12px;
+}
+
+.speaknotes-import-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 8px 12px;
+	border-bottom: 1px solid var(--background-modifier-border);
+	transition: background-color 0.15s ease;
+}
+
+.speaknotes-import-item:last-child {
+	border-bottom: none;
+}
+
+.speaknotes-import-item:hover {
+	background: var(--background-modifier-hover);
+}
+
+.speaknotes-import-item label {
+	cursor: pointer;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.speaknotes-import-more {
+	padding: 12px;
+	text-align: center;
+	color: var(--text-muted);
+	font-size: 0.9em;
+	background: var(--background-secondary);
+	margin: 0;
+}
+
+.speaknotes-import-actions {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin-top: 20px;
+	padding-top: 16px;
+	border-top: 1px solid var(--background-modifier-border);
+}
+
+/* ========================================
+   Graph Modal
+   ======================================== */
+.speaknotes-graph-modal {
+	padding: 20px;
+}
+
+.speaknotes-graph-container {
+	margin: 16px 0;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 8px;
+	overflow: hidden;
+	background: var(--background-primary);
+}
+
+.speaknotes-graph-canvas {
+	display: block;
+	cursor: grab;
+}
+
+.speaknotes-graph-canvas:active {
+	cursor: grabbing;
+}
+
+.speaknotes-graph-controls {
+	display: flex;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+.speaknotes-graph-controls button {
+	padding: 6px 12px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 4px;
+	background: var(--background-secondary);
+	color: var(--text-normal);
+	cursor: pointer;
+	font-size: 1em;
+	min-width: 36px;
+	transition: background-color 0.15s ease;
+}
+
+.speaknotes-graph-controls button:hover {
+	background: var(--background-modifier-hover);
+}
+
+.speaknotes-graph-legend {
+	color: var(--text-muted);
+	font-size: 0.9em;
+	text-align: center;
+}
+
+.speaknotes-graph-legend p {
+	margin: 0;
+}
+
+/* ========================================
+   Additional Utility Styles
+   ======================================== */
+
+/* Note date in sidebar */
+.speaknotes-note-date {
+	color: var(--text-faint);
+}
+
+/* Processing state modifier */
+.speaknotes-processing-state {
+	min-height: 200px;
+}
+
+/* Status badges */
+.speaknotes-status-processing,
+.speaknotes-status-transcribing {
+	background: var(--color-blue);
+	color: var(--text-on-accent);
+}
+
+.speaknotes-status-done {
+	background: var(--color-green);
+	color: var(--text-on-accent);
+}
+
+/* Modal base improvements */
+.modal-content:has(.speaknotes-bulk-export-modal),
+.modal-content:has(.speaknotes-import-modal),
+.modal-content:has(.speaknotes-graph-modal) {
+	padding: 0;
+}
+
+/* Checkbox alignment */
+.speaknotes-bulk-item input[type="checkbox"],
+.speaknotes-import-item input[type="checkbox"],
+.speaknotes-select-all input[type="checkbox"] {
+	margin: 0;
+	cursor: pointer;
+}
+
+/* Button states */
+button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+/* Scrollbar styling for lists */
+.speaknotes-bulk-list::-webkit-scrollbar,
+.speaknotes-import-files::-webkit-scrollbar,
+.speaknotes-notes-list::-webkit-scrollbar {
+	width: 8px;
+}
+
+.speaknotes-bulk-list::-webkit-scrollbar-track,
+.speaknotes-import-files::-webkit-scrollbar-track,
+.speaknotes-notes-list::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.speaknotes-bulk-list::-webkit-scrollbar-thumb,
+.speaknotes-import-files::-webkit-scrollbar-thumb,
+.speaknotes-notes-list::-webkit-scrollbar-thumb {
+	background: var(--background-modifier-border);
+	border-radius: 4px;
+}
+
+.speaknotes-bulk-list::-webkit-scrollbar-thumb:hover,
+.speaknotes-import-files::-webkit-scrollbar-thumb:hover,
+.speaknotes-notes-list::-webkit-scrollbar-thumb:hover {
+	background: var(--background-modifier-border-hover);
+}
