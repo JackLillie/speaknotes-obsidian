@@ -1,7 +1,7 @@
 {
 	"id": "speaknotes",
 	"name": "SpeakNotes",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"minAppVersion": "1.5.0",
 	"description": "Transcribe and summarize audio and video into structured notes. Record voice memos, import files, and sync your SpeakNotes library into your vault.",
 	"author": "SpeakNotes",

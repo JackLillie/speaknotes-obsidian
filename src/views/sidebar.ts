@@ -6,6 +6,7 @@
 import { ItemView, WorkspaceLeaf, setIcon, MarkdownView } from "obsidian";
 import type SpeakNotesPlugin from "../main";
 import type { SpeakNotesNote, SpeakNotesFolder } from "../types/speaknotes";
+import { captureException } from "../lib/sentry";
 
 export const VIEW_TYPE_SIDEBAR = "speaknotes-sidebar";
 
@@ -269,6 +270,7 @@ export class SidebarView extends ItemView {
 		} catch (error) {
 			this.isLoading = false;
 			console.error("Failed to load notes:", error);
+			captureException(error, { stage: "load sidebar notes" });
 			this.renderNotesList();
 		}
 	}

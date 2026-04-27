@@ -1,6 +1,6 @@
 {
 	"name": "speaknotes-obsidian",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Transcribe and summarize audio and video into structured notes",
 	"main": "main.js",
 	"scripts": {
@@ -33,6 +33,7 @@
 	},
 	"dependencies": {
 		"@aws-sdk/client-s3": "^3.705.0",
+		"@sentry/browser": "^10.50.0",
 		"dotenv": "^16.4.7",
 		"i18next": "^25.7.4"
 	}

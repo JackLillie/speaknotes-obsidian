@@ -5,6 +5,7 @@
 
 import { Notice, Plugin, TFile, MarkdownView } from "obsidian";
 import { SpeakNotesAPI } from "./api/client";
+import { addBreadcrumb, captureException, initSentry, setSentryUser } from "./lib/sentry";
 import { SidebarView, VIEW_TYPE_SIDEBAR } from "./views/sidebar";
 import { RecorderModal } from "./views/recorder";
 import { ExportModal } from "./views/export-modal";
@@ -23,6 +24,14 @@ export default class SpeakNotesPlugin extends Plugin {
 
 	async onload(): Promise<void> {
 		await this.loadSettings();
+
+		initSentry(this.manifest.version);
+		if (this.settings.userId) {
+			setSentryUser({
+				id: this.settings.userId,
+				email: this.settings.userEmail || undefined,
+			});
+		}
 
 		// Initialize API client
 		this.api = new SpeakNotesAPI({
@@ -232,13 +241,27 @@ export default class SpeakNotesPlugin extends Plugin {
 
 	async handleAuthCallback(params: Record<string, string>): Promise<void> {
 		const { token, userId, email } = params;
+		addBreadcrumb("auth callback received", {
+			hasToken: !!token,
+			hasUserId: !!userId,
+		});
 
-		if (token && userId) {
+		if (!token || !userId) {
+			captureException(new Error("Auth callback missing token or userId"), {
+				hasToken: !!token,
+				hasUserId: !!userId,
+			});
+			new Notice("SpeakNotes: Login failed, please try again.");
+			return;
+		}
+
+		try {
 			this.settings.firebaseToken = token;
 			this.settings.userId = userId;
 			this.settings.userEmail = email || "";
 
 			await this.saveSettings();
+			setSentryUser({ id: userId, email: email || undefined });
 
 			// Update API client
 			this.api.setToken(token);
@@ -248,6 +271,7 @@ export default class SpeakNotesPlugin extends Plugin {
 				await this.api.connectObsidian();
 			} catch (error) {
 				console.error("Failed to register Obsidian integration:", error);
+				captureException(error, { stage: "connectObsidian", userId });
 			}
 
 			// Update status bar
@@ -258,8 +282,9 @@ export default class SpeakNotesPlugin extends Plugin {
 			try {
 				await this.syncService.sync();
 				this.statusBarManager.setStatus("success");
-			} catch {
+			} catch (error) {
 				this.statusBarManager.setStatus("error");
+				captureException(error, { stage: "initial sync", userId });
 			}
 
 			// Start periodic sync
@@ -272,6 +297,9 @@ export default class SpeakNotesPlugin extends Plugin {
 
 			// Show success notification
 			new Notice("SpeakNotes: Successfully connected!");
+		} catch (error) {
+			captureException(error, { stage: "handleAuthCallback", userId });
+			new Notice("SpeakNotes: Login failed, please try again.");
 		}
 	}
 

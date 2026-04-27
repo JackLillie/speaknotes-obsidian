@@ -8,6 +8,7 @@ import type { SpeakNotesAPI } from "../api/client";
 import type { SpeakNotesSettings } from "../types/plugin";
 import type { SpeakNotesNote, ContentFormat } from "../types/speaknotes";
 import { getFormattedContent } from "../utils/markdown";
+import { captureException } from "../lib/sentry";
 
 export class SyncService {
 	app: App;
@@ -148,6 +149,7 @@ export class SyncService {
 			}
 		} catch (error) {
 			console.error("Sync failed:", error);
+			captureException(error, { stage: "sync", userId: this.settings.userId });
 			new Notice(`SpeakNotes: Sync failed - ${(error as Error).message}`);
 		} finally {
 			this.isSyncing = false;

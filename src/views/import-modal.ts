@@ -7,6 +7,7 @@ import { App, Modal, Notice, TFile, Setting } from "obsidian";
 import type SpeakNotesPlugin from "../main";
 import type { ContentFormat, SpeakNotesFolder } from "../types/speaknotes";
 import { CONTENT_FORMATS } from "../types/plugin";
+import { captureException } from "../lib/sentry";
 
 export class ImportModal extends Modal {
 	plugin: SpeakNotesPlugin;
@@ -253,6 +254,7 @@ export class ImportModal extends Modal {
 			this.close();
 		} catch (error) {
 			console.error("Import failed:", error);
+			captureException(error, { stage: "import single file" });
 			new Notice(`Import failed: ${(error as Error).message}`);
 			this.isImporting = false;
 			this.render();

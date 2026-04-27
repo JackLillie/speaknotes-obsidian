@@ -7,6 +7,7 @@ import { App, Modal, Notice } from "obsidian";
 import type SpeakNotesPlugin from "../main";
 import type { ContentFormat, SpeakNotesNote } from "../types/speaknotes";
 import { CONTENT_FORMATS } from "../types/plugin";
+import { captureException } from "../lib/sentry";
 
 export class RecorderModal extends Modal {
 	plugin: SpeakNotesPlugin;
@@ -127,6 +128,7 @@ export class RecorderModal extends Modal {
 			btn.addClass("recording");
 		} catch (error) {
 			console.error("Failed to start recording:", error);
+			captureException(error, { stage: "start recording" });
 			new Notice("Failed to access microphone. Please check permissions.");
 		}
 	}
@@ -225,6 +227,7 @@ export class RecorderModal extends Modal {
 			this.close();
 		} catch (error) {
 			console.error("Upload failed:", error);
+			captureException(error, { stage: "voice memo upload" });
 			this.contentEl.empty();
 
 			const errorEl = this.contentEl.createDiv("speaknotes-error");
