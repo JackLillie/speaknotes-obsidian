@@ -3,7 +3,7 @@
  * Import markdown notes from Obsidian to SpeakNotes
  */
 
-import { App, Modal, Notice, TFile, Setting } from "obsidian";
+import { App, Modal, Notice, TFile, Setting, requestUrl } from "obsidian";
 import type SpeakNotesPlugin from "../main";
 import type { ContentFormat, SpeakNotesFolder } from "../types/speaknotes";
 import { CONTENT_FORMATS } from "../types/plugin";
@@ -83,7 +83,7 @@ export class ImportModal extends Modal {
 
 		// Format selector
 		new Setting(contentEl)
-			.setName("Content Format")
+			.setName("Content format")
 			.setDesc("How should SpeakNotes process this content?")
 			.addDropdown((dropdown) => {
 				for (const format of CONTENT_FORMATS) {
@@ -97,7 +97,7 @@ export class ImportModal extends Modal {
 
 		// Folder selector
 		new Setting(contentEl)
-			.setName("Target Folder")
+			.setName("Target folder")
 			.setDesc("Which SpeakNotes folder to import to")
 			.addDropdown((dropdown) => {
 				dropdown.addOption("", "No Folder");
@@ -136,7 +136,7 @@ export class ImportModal extends Modal {
 
 		// Format selector
 		new Setting(contentEl)
-			.setName("Content Format")
+			.setName("Content format")
 			.setDesc("Format to apply to all imported notes")
 			.addDropdown((dropdown) => {
 				for (const format of CONTENT_FORMATS) {
@@ -149,7 +149,7 @@ export class ImportModal extends Modal {
 			});
 
 		// Folder selector
-		new Setting(contentEl).setName("Target Folder").addDropdown((dropdown) => {
+		new Setting(contentEl).setName("Target folder").addDropdown((dropdown) => {
 			dropdown.addOption("", "No Folder");
 			for (const folder of this.folders) {
 				dropdown.addOption(folder.id, folder.name);
@@ -230,7 +230,7 @@ export class ImportModal extends Modal {
 
 		const importBtn = actionsEl.createEl("button", {
 			cls: "mod-cta",
-			text: this.isImporting ? "Importing..." : "Import Selected",
+			text: this.isImporting ? "Importing..." : "Import selected",
 		});
 		importBtn.disabled = this.selectedFiles.size === 0 || this.isImporting;
 		importBtn.onclick = () => this.importMultipleFiles();
@@ -296,11 +296,10 @@ export class ImportModal extends Modal {
 	}
 
 	async importContent(title: string, content: string): Promise<void> {
-		// Extract content without frontmatter
 		const cleanContent = this.removeFrontmatter(content);
 
-		// Call API to create note
-		const response = await fetch(`${this.plugin.settings.apiUrl}/api/v1/notes/import`, {
+		const response = await requestUrl({
+			url: `${this.plugin.settings.apiUrl}/api/v1/notes/import`,
 			method: "POST",
 			headers: {
 				Authorization: `Bearer ${this.plugin.settings.firebaseToken}`,
@@ -313,11 +312,11 @@ export class ImportModal extends Modal {
 				folderId: this.selectedFolderId,
 				source: "obsidian-import",
 			}),
+			throw: false,
 		});
 
-		if (!response.ok) {
-			const errorText = await response.text();
-			throw new Error(`API error: ${response.status} - ${errorText}`);
+		if (response.status < 200 || response.status >= 300) {
+			throw new Error(`API error: ${response.status} - ${response.text}`);
 		}
 	}
 

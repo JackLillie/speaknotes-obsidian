@@ -80,7 +80,7 @@ export class BulkExportModal extends Modal {
 
 		// Folder filter
 		new Setting(filtersEl).setName("Filter by folder").addDropdown((dropdown) => {
-			dropdown.addOption("", "All Folders");
+			dropdown.addOption("", "All folders");
 			for (const folder of this.folders) {
 				dropdown.addOption(folder.id, folder.name);
 			}
@@ -156,7 +156,7 @@ export class BulkExportModal extends Modal {
 
 		const exportBtn = actionsEl.createEl("button", {
 			cls: "mod-cta",
-			text: this.isExporting ? "Exporting..." : "Export Selected",
+			text: this.isExporting ? "Exporting..." : "Export selected",
 		});
 		exportBtn.disabled = this.selectedNotes.size === 0 || this.isExporting;
 		exportBtn.onclick = () => this.exportSelected();

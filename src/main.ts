@@ -58,19 +58,21 @@ export default class SpeakNotesPlugin extends Plugin {
 		// Add commands
 		this.addCommand({
 			id: "open-sidebar",
-			name: "Open SpeakNotes Library",
-			callback: () => this.activateSidebar(),
+			name: "Open library",
+			callback: () => {
+				void this.activateSidebar();
+			},
 		});
 
 		this.addCommand({
 			id: "record-voice-memo",
-			name: "Record Voice Memo",
+			name: "Record voice memo",
 			callback: () => new RecorderModal(this.app, this).open(),
 		});
 
 		this.addCommand({
 			id: "export-current-note",
-			name: "Export Current Note to SpeakNotes",
+			name: "Export current note",
 			editorCallback: (editor) => {
 				const view = this.app.workspace.getActiveViewOfType(MarkdownView);
 				if (view) {
@@ -81,27 +83,29 @@ export default class SpeakNotesPlugin extends Plugin {
 
 		this.addCommand({
 			id: "sync-library",
-			name: "Sync SpeakNotes Library",
-			callback: async () => {
-				this.statusBarManager.setStatus("syncing");
-				try {
-					await this.syncService.sync();
-					this.statusBarManager.setStatus("success");
-				} catch {
-					this.statusBarManager.setStatus("error");
-				}
+			name: "Sync library",
+			callback: () => {
+				void (async () => {
+					this.statusBarManager.setStatus("syncing");
+					try {
+						await this.syncService.sync();
+						this.statusBarManager.setStatus("success");
+					} catch {
+						this.statusBarManager.setStatus("error");
+					}
+				})();
 			},
 		});
 
 		this.addCommand({
 			id: "bulk-export",
-			name: "Bulk Export Summaries",
+			name: "Bulk export summaries",
 			callback: () => new BulkExportModal(this.app, this).open(),
 		});
 
 		this.addCommand({
 			id: "import-notes",
-			name: "Import Summaries to SpeakNotes",
+			name: "Import summaries",
 			callback: () => new ImportModal(this.app, this).open(),
 		});
 
@@ -129,9 +133,9 @@ export default class SpeakNotesPlugin extends Plugin {
 		// Track file modifications for two-way sync
 		// When a synced file is edited, update its "updated" timestamp in frontmatter
 		this.registerEvent(
-			this.app.vault.on("modify", async (file) => {
+			this.app.vault.on("modify", (file) => {
 				if (file instanceof TFile && this.settings.enableTwoWaySync) {
-					await this.handleFileModification(file);
+					void this.handleFileModification(file);
 				}
 			})
 		);
@@ -139,9 +143,9 @@ export default class SpeakNotesPlugin extends Plugin {
 		// Track file renames for two-way sync
 		// When a synced file is renamed, update its "updated" timestamp in frontmatter
 		this.registerEvent(
-			this.app.vault.on("rename", async (file, oldPath) => {
+			this.app.vault.on("rename", (file, oldPath) => {
 				if (file instanceof TFile && this.settings.enableTwoWaySync) {
-					await this.handleFileRename(file, oldPath);
+					void this.handleFileRename(file, oldPath);
 				}
 			})
 		);
@@ -151,15 +155,17 @@ export default class SpeakNotesPlugin extends Plugin {
 		this.addSettingTab(this.settingsTab);
 
 		// Register protocol handler for OAuth callback
-		this.registerObsidianProtocolHandler("speaknotes-auth-callback", async (params) => {
-			await this.handleAuthCallback(params);
+		this.registerObsidianProtocolHandler("speaknotes-auth-callback", (params) => {
+			void this.handleAuthCallback(params);
 		});
 
 		// Auto-sync on startup if configured
 		if (this.settings.autoSync && this.settings.userId) {
 			// Delay sync to allow Obsidian to fully load
 			this.registerInterval(
-				window.setTimeout(() => this.syncService.sync(), 5000)
+				window.setTimeout(() => {
+					void this.syncService.sync();
+				}, 5000)
 			);
 		}
 
@@ -170,7 +176,7 @@ export default class SpeakNotesPlugin extends Plugin {
 
 	}
 
-	async onunload(): Promise<void> {
+	onunload(): void {
 		this.syncService.stopPeriodicSync();
 		this.statusBarManager.destroy();
 	}
@@ -251,7 +257,7 @@ export default class SpeakNotesPlugin extends Plugin {
 				hasToken: !!token,
 				hasUserId: !!userId,
 			});
-			new Notice("SpeakNotes: Login failed, please try again.");
+			new Notice("Login failed, please try again.");
 			return;
 		}
 
@@ -296,10 +302,10 @@ export default class SpeakNotesPlugin extends Plugin {
 			this.settingsTab.display();
 
 			// Show success notification
-			new Notice("SpeakNotes: Successfully connected!");
+			new Notice("Successfully connected!");
 		} catch (error) {
 			captureException(error, { stage: "handleAuthCallback", userId });
-			new Notice("SpeakNotes: Login failed, please try again.");
+			new Notice("Login failed, please try again.");
 		}
 	}
 

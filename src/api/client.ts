@@ -1,14 +1,21 @@
 /**
  * SpeakNotes API Client for Obsidian Plugin
- * Connects to the Express API server
+ * Uses Obsidian's requestUrl helper instead of fetch (required by Community Plugin policy).
  */
 
+import { requestUrl, type RequestUrlParam } from "obsidian";
 import type { ContentFormat, SpeakNotesNote } from "../types/speaknotes";
 import type { UploadOptions, UploadResponse } from "../types/plugin";
 
 interface APIClientConfig {
 	baseUrl: string;
 	token: string;
+}
+
+interface JsonRequestOptions {
+	method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+	body?: string;
+	headers?: Record<string, string>;
 }
 
 export class SpeakNotesAPI {
@@ -20,85 +27,95 @@ export class SpeakNotesAPI {
 		this.token = config.token;
 	}
 
-	/**
-	 * Make an authenticated API request
-	 */
-	private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
-		const response = await fetch(`${this.baseUrl}${endpoint}`, {
-			...options,
+	private async request<T>(endpoint: string, options: JsonRequestOptions = {}): Promise<T> {
+		const params: RequestUrlParam = {
+			url: `${this.baseUrl}${endpoint}`,
+			method: options.method ?? "GET",
 			headers: {
 				Authorization: `Bearer ${this.token}`,
 				"Content-Type": "application/json",
-				...options.headers,
+				...(options.headers ?? {}),
 			},
-		});
+			body: options.body,
+			throw: false,
+		};
 
-		if (!response.ok) {
-			const errorText = await response.text();
-			throw new Error(`API Error: ${response.status} ${response.statusText} - ${errorText}`);
+		const response = await requestUrl(params);
+		if (response.status < 200 || response.status >= 300) {
+			throw new Error(`API Error: ${response.status} - ${response.text}`);
 		}
-
-		return response.json();
+		return response.json as T;
 	}
 
-	/**
-	 * Upload audio for transcription and summarization
-	 * Endpoint: POST /upload-audio
-	 */
+	private async uploadMultipart<T>(
+		endpoint: string,
+		fileField: string,
+		fileName: string,
+		fileBlob: Blob,
+		fields: Record<string, string>
+	): Promise<T> {
+		const boundary = `----SpeakNotesBoundary${Math.random().toString(36).slice(2)}`;
+		const encoder = new TextEncoder();
+		const parts: Uint8Array[] = [];
+		const fileBuffer = new Uint8Array(await fileBlob.arrayBuffer());
+
+		for (const [key, value] of Object.entries(fields)) {
+			parts.push(
+				encoder.encode(
+					`--${boundary}\r\nContent-Disposition: form-data; name="${key}"\r\n\r\n${value}\r\n`
+				)
+			);
+		}
+		const fileType = fileBlob.type || "application/octet-stream";
+		parts.push(
+			encoder.encode(
+				`--${boundary}\r\nContent-Disposition: form-data; name="${fileField}"; filename="${fileName}"\r\nContent-Type: ${fileType}\r\n\r\n`
+			)
+		);
+		parts.push(fileBuffer);
+		parts.push(encoder.encode(`\r\n--${boundary}--\r\n`));
+
+		const total = parts.reduce((acc, p) => acc + p.byteLength, 0);
+		const body = new Uint8Array(total);
+		let offset = 0;
+		for (const p of parts) {
+			body.set(p, offset);
+			offset += p.byteLength;
+		}
+
+		const response = await requestUrl({
+			url: `${this.baseUrl}${endpoint}`,
+			method: "POST",
+			headers: {
+				Authorization: `Bearer ${this.token}`,
+				"Content-Type": `multipart/form-data; boundary=${boundary}`,
+			},
+			body: body.buffer,
+			throw: false,
+		});
+
+		if (response.status < 200 || response.status >= 300) {
+			throw new Error(`Upload failed: ${response.status} - ${response.text}`);
+		}
+		return response.json as T;
+	}
+
 	async uploadAudio(audioBlob: Blob, options: UploadOptions): Promise<UploadResponse> {
-		const formData = new FormData();
-		formData.append("audio", audioBlob, "recording.webm");
-		formData.append("title", options.title);
-		formData.append("style", options.format);
-		formData.append("source", options.source);
-
-		const response = await fetch(`${this.baseUrl}/upload-audio`, {
-			method: "POST",
-			headers: {
-				Authorization: `Bearer ${this.token}`,
-			},
-			body: formData,
+		return this.uploadMultipart("/upload-audio", "audio", "recording.webm", audioBlob, {
+			title: options.title,
+			style: options.format,
+			source: options.source,
 		});
-
-		if (!response.ok) {
-			const errorText = await response.text();
-			throw new Error(`Upload failed: ${response.status} - ${errorText}`);
-		}
-
-		return response.json();
 	}
 
-	/**
-	 * Upload video for transcription and summarization
-	 * Endpoint: POST /upload-video
-	 */
 	async uploadVideo(videoBlob: Blob, options: UploadOptions): Promise<UploadResponse> {
-		const formData = new FormData();
-		formData.append("video", videoBlob);
-		formData.append("title", options.title);
-		formData.append("style", options.format);
-		formData.append("source", options.source);
-
-		const response = await fetch(`${this.baseUrl}/upload-video`, {
-			method: "POST",
-			headers: {
-				Authorization: `Bearer ${this.token}`,
-			},
-			body: formData,
+		return this.uploadMultipart("/upload-video", "video", "recording.webm", videoBlob, {
+			title: options.title,
+			style: options.format,
+			source: options.source,
 		});
-
-		if (!response.ok) {
-			const errorText = await response.text();
-			throw new Error(`Upload failed: ${response.status} - ${errorText}`);
-		}
-
-		return response.json();
 	}
 
-	/**
-	 * Regenerate summary with a different format
-	 * Endpoint: POST /update-style
-	 */
 	async updateStyle(
 		noteId: string,
 		format: ContentFormat,
@@ -114,10 +131,6 @@ export class SpeakNotesAPI {
 		});
 	}
 
-	/**
-	 * Ask a question about transcribed content
-	 * Endpoint: POST /ask-question
-	 */
 	async askQuestion(noteId: string, question: string, userId: string): Promise<{ answer: string }> {
 		return this.request("/ask-question", {
 			method: "POST",
@@ -125,9 +138,6 @@ export class SpeakNotesAPI {
 		});
 	}
 
-	/**
-	 * Get notes via API v1 endpoint
-	 */
 	async getNotes(params?: {
 		updatedAfter?: string;
 		folderId?: string;
@@ -144,30 +154,18 @@ export class SpeakNotesAPI {
 		return this.request(`/api/v1/notes${query ? `?${query}` : ""}`);
 	}
 
-	/**
-	 * Get a single note by ID
-	 */
 	async getNote(noteId: string): Promise<SpeakNotesNote> {
 		return this.request(`/api/v1/notes/${noteId}`);
 	}
 
-	/**
-	 * Get note processing status
-	 */
 	async getNoteStatus(noteId: string): Promise<{ status: string; note?: SpeakNotesNote }> {
 		return this.request(`/api/v1/notes/${noteId}/status`);
 	}
 
-	/**
-	 * Set the authentication token
-	 */
 	setToken(token: string): void {
 		this.token = token;
 	}
 
-	/**
-	 * Set the API URL
-	 */
 	setBaseUrl(baseUrl: string): void {
 		this.baseUrl = baseUrl;
 	}
@@ -176,20 +174,12 @@ export class SpeakNotesAPI {
 	// Obsidian Integration API Endpoints
 	// ============================================================================
 
-	/**
-	 * Connect Obsidian integration
-	 * Endpoint: POST /integrations/obsidian/connect
-	 */
 	async connectObsidian(): Promise<{ success: boolean; message: string }> {
 		return this.request("/integrations/obsidian/connect", {
 			method: "POST",
 		});
 	}
 
-	/**
-	 * Get Obsidian integration status
-	 * Endpoint: GET /integrations/obsidian/status
-	 */
 	async getObsidianStatus(): Promise<{
 		connected: boolean;
 		settings?: {
@@ -203,10 +193,6 @@ export class SpeakNotesAPI {
 		return this.request("/integrations/obsidian/status");
 	}
 
-	/**
-	 * Update Obsidian integration settings
-	 * Endpoint: PUT /integrations/obsidian/settings
-	 */
 	async updateObsidianSettings(settings: {
 		autoSync?: boolean;
 		syncInterval?: number;
@@ -219,20 +205,12 @@ export class SpeakNotesAPI {
 		});
 	}
 
-	/**
-	 * Disconnect Obsidian integration
-	 * Endpoint: DELETE /integrations/obsidian
-	 */
 	async disconnectObsidian(): Promise<{ success: boolean; message: string }> {
 		return this.request("/integrations/obsidian", {
 			method: "DELETE",
 		});
 	}
 
-	/**
-	 * Get notes for Obsidian sync (optimized endpoint)
-	 * Endpoint: GET /integrations/obsidian/notes
-	 */
 	async getObsidianNotes(params?: {
 		updatedAfter?: string;
 		status?: string;
@@ -251,20 +229,12 @@ export class SpeakNotesAPI {
 		return this.request(`/integrations/obsidian/notes${query ? `?${query}` : ""}`);
 	}
 
-	/**
-	 * Get folders for Obsidian
-	 * Endpoint: GET /integrations/obsidian/folders
-	 */
 	async getObsidianFolders(): Promise<{
 		data: Array<{ id: string; name: string; parentId?: string }>;
 	}> {
 		return this.request("/integrations/obsidian/folders");
 	}
 
-	/**
-	 * Mark a note as exported to Obsidian
-	 * Endpoint: POST /integrations/obsidian/export
-	 */
 	async markNoteExported(noteId: string): Promise<{
 		success: boolean;
 		note: SpeakNotesNote;
@@ -275,10 +245,6 @@ export class SpeakNotesAPI {
 		});
 	}
 
-	/**
-	 * Bulk export all notes to Obsidian
-	 * Endpoint: POST /integrations/obsidian/export-all
-	 */
 	async bulkExportToObsidian(params?: {
 		includeAlreadyExported?: boolean;
 		updatedAfter?: string;
@@ -295,20 +261,12 @@ export class SpeakNotesAPI {
 		});
 	}
 
-	/**
-	 * Record sync event from Obsidian plugin
-	 * Endpoint: POST /integrations/obsidian/sync
-	 */
 	async recordSync(): Promise<{ success: boolean }> {
 		return this.request("/integrations/obsidian/sync", {
 			method: "POST",
 		});
 	}
 
-	/**
-	 * Update a note from Obsidian (two-way sync)
-	 * Endpoint: PATCH /integrations/obsidian/notes/:noteId
-	 */
 	async updateNote(
 		noteId: string,
 		data: {

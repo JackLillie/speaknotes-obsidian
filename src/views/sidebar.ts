@@ -36,15 +36,16 @@ export class SidebarView extends ItemView {
 	}
 
 	async onOpen(): Promise<void> {
-		await this.render();
+		this.render();
 		await this.loadNotes();
 	}
 
-	async onClose(): Promise<void> {
+	onClose(): Promise<void> {
 		this.contentEl.empty();
+		return Promise.resolve();
 	}
 
-	async render(): Promise<void> {
+	render(): void {
 		const container = this.contentEl;
 		container.empty();
 		container.addClass("speaknotes-sidebar");
@@ -83,7 +84,7 @@ export class SidebarView extends ItemView {
 
 			const allOption = folderSelect.createEl("option", {
 				value: "",
-				text: "All Folders",
+				text: "All folders",
 			});
 			if (!this.selectedFolderId) allOption.selected = true;
 
@@ -112,7 +113,7 @@ export class SidebarView extends ItemView {
 			const statusEl = container.createDiv("speaknotes-status-disconnected");
 			statusEl.createEl("p", { text: "Not connected to SpeakNotes" });
 			const connectBtn = statusEl.createEl("button", {
-				text: "Connect Account",
+				text: "Connect account",
 				cls: "mod-cta",
 			});
 			connectBtn.onclick = () => this.plugin.openSettings();
@@ -360,7 +361,7 @@ class NotePreviewModal extends Modal {
 			const transcriptToggle = contentEl.createEl("details", {
 				cls: "speaknotes-preview-transcript",
 			});
-			transcriptToggle.createEl("summary", { text: "Full Transcription" });
+			transcriptToggle.createEl("summary", { text: "Full transcription" });
 			transcriptToggle.createEl("div", {
 				text: this.note.originalTranscription,
 			});

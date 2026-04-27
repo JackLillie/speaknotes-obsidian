@@ -36,7 +36,9 @@ export class SyncService {
 	startPeriodicSync(): void {
 		if (this.settings.syncInterval > 0) {
 			this.syncIntervalId = window.setInterval(
-				() => this.sync(),
+				() => {
+					void this.sync();
+				},
 				this.settings.syncInterval * 60 * 1000
 			);
 		}
@@ -58,17 +60,17 @@ export class SyncService {
 	 */
 	async sync(): Promise<void> {
 		if (this.isSyncing) {
-			new Notice("SpeakNotes: Sync already in progress");
+			new Notice("Sync already in progress");
 			return;
 		}
 
 		if (!this.settings.userId || !this.settings.firebaseToken) {
-			new Notice("SpeakNotes: Not connected. Please connect your account.");
+			new Notice("Not connected. Please connect your account.");
 			return;
 		}
 
 		this.isSyncing = true;
-		new Notice("SpeakNotes: Starting sync...");
+		new Notice("Starting sync...");
 
 		try {
 			// Fetch folders first (needed for both directions)
@@ -143,14 +145,14 @@ export class SyncService {
 			if (pushedCount > 0) parts.push(`pushed ${pushedCount}`);
 			if (pulledCount > 0) parts.push(`pulled ${pulledCount}`);
 			if (parts.length === 0) {
-				new Notice("SpeakNotes: Everything up to date");
+				new Notice("Everything up to date");
 			} else {
-				new Notice(`SpeakNotes: Synced (${parts.join(", ")})`);
+				new Notice(`Synced (${parts.join(", ")})`);
 			}
 		} catch (error) {
 			console.error("Sync failed:", error);
 			captureException(error, { stage: "sync", userId: this.settings.userId });
-			new Notice(`SpeakNotes: Sync failed - ${(error as Error).message}`);
+			new Notice(`Sync failed - ${(error as Error).message}`);
 		} finally {
 			this.isSyncing = false;
 		}

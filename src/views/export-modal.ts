@@ -64,7 +64,7 @@ export class ExportModal extends Modal {
 
 		// Format selector
 		const formatContainer = container.createDiv("speaknotes-input-group");
-		formatContainer.createEl("label", { text: "Summary Format" });
+		formatContainer.createEl("label", { text: "Summary format" });
 		const formatSelect = formatContainer.createEl("select", {
 			cls: "speaknotes-format-select",
 		});
@@ -135,7 +135,7 @@ export class ExportModal extends Modal {
 
 		// Format selector
 		const formatContainer = container.createDiv("speaknotes-input-group");
-		formatContainer.createEl("label", { text: "Summary Format" });
+		formatContainer.createEl("label", { text: "Summary format" });
 		const formatSelect = formatContainer.createEl("select", {
 			cls: "speaknotes-format-select",
 		});
@@ -180,7 +180,7 @@ export class ExportModal extends Modal {
 		closeBtn.onclick = () => this.close();
 	}
 
-	async handleTextExport(): Promise<void> {
+	handleTextExport(): void {
 		// Show processing state
 		this.contentEl.empty();
 		const processingEl = this.contentEl.createDiv("speaknotes-processing");
@@ -246,7 +246,7 @@ export class ExportModal extends Modal {
 					const folderMap = new Map(folders.map((f) => [f.id, f]));
 					await this.plugin.syncService.exportNoteToVault(note, folderMap);
 
-					new Notice(`SpeakNotes: Transcribed "${note.title}"`);
+					new Notice(`Transcribed "${note.title}"`);
 					this.close();
 					return;
 				}

@@ -53,7 +53,7 @@ export class RecorderModal extends Modal {
 
 		const recordBtn = controls.createEl("button", {
 			cls: "speaknotes-record-btn",
-			text: "Start Recording",
+			text: "Start recording",
 		});
 		recordBtn.onclick = () => this.toggleRecording(recordBtn);
 
@@ -62,13 +62,13 @@ export class RecorderModal extends Modal {
 		titleContainer.createEl("label", { text: "Title (optional)" });
 		titleContainer.createEl("input", {
 			type: "text",
-			placeholder: "Voice Memo",
+			placeholder: "Voice memo",
 			cls: "speaknotes-title-input",
 		});
 
 		// Format selector
 		const formatContainer = contentEl.createDiv("speaknotes-input-group");
-		formatContainer.createEl("label", { text: "Summary Format" });
+		formatContainer.createEl("label", { text: "Summary format" });
 		const formatSelect = formatContainer.createEl("select", {
 			cls: "speaknotes-format-select",
 		});
@@ -124,7 +124,7 @@ export class RecorderModal extends Modal {
 			this.isRecording = true;
 			this.startTimer();
 
-			btn.textContent = "Stop Recording";
+			btn.textContent = "Stop recording";
 			btn.addClass("recording");
 		} catch (error) {
 			console.error("Failed to start recording:", error);
@@ -175,7 +175,7 @@ export class RecorderModal extends Modal {
 			};
 
 			this.mediaRecorder.stop();
-			btn.textContent = "Start Recording";
+			btn.textContent = "Start recording";
 			btn.removeClass("recording");
 		});
 	}
@@ -223,7 +223,7 @@ export class RecorderModal extends Modal {
 			// Create note in vault
 			await this.createNoteInVault(completedNote);
 
-			new Notice(`SpeakNotes: Created "${completedNote.title}"`);
+			new Notice(`Created "${completedNote.title}"`);
 			this.close();
 		} catch (error) {
 			console.error("Upload failed:", error);

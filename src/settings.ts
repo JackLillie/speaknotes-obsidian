@@ -239,10 +239,10 @@ export class SettingsTab extends PluginSettingTab {
 	}
 
 	async handleForceRefresh(): Promise<void> {
-		new Notice("SpeakNotes: Starting force refresh...");
+		new Notice("Starting force refresh...");
 
 		try {
-			const { vault } = this.plugin.app;
+			const { vault, fileManager } = this.plugin.app;
 			const exportFolder = this.plugin.settings.exportFolder || "SpeakNotes";
 
 			// Find and delete all synced files
@@ -254,7 +254,7 @@ export class SettingsTab extends PluginSettingTab {
 					const content = await vault.read(file);
 					// Only delete files with speaknotes_id in frontmatter
 					if (content.includes("speaknotes_id:")) {
-						await vault.delete(file);
+						await fileManager.trashFile(file);
 						deletedCount++;
 					}
 				}
@@ -264,7 +264,7 @@ export class SettingsTab extends PluginSettingTab {
 			this.plugin.settings.lastSyncTimestamp = 0;
 			await this.plugin.saveSettings();
 
-			new Notice(`SpeakNotes: Deleted ${deletedCount} local summaries`);
+			new Notice(`Deleted ${deletedCount} local summaries`);
 
 			// Trigger fresh sync
 			await this.plugin.syncService.sync();
@@ -272,7 +272,7 @@ export class SettingsTab extends PluginSettingTab {
 			this.display();
 		} catch (error) {
 			console.error("Force refresh failed:", error);
-			new Notice(`SpeakNotes: Force refresh failed - ${(error as Error).message}`);
+			new Notice(`Force refresh failed - ${(error as Error).message}`);
 		}
 	}
 }
