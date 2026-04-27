@@ -186,7 +186,7 @@ export class SettingsTab extends PluginSettingTab {
 
 		new Setting(containerEl)
 			.setName("Version")
-			.setDesc("1.0.1")
+			.setDesc(this.plugin.manifest.version)
 			.addButton((btn) =>
 				btn.setButtonText("Visit website").onClick(() => {
 					window.open("https://speaknotes.io");
