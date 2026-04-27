@@ -60,6 +60,25 @@ export class SettingsTab extends PluginSettingTab {
 						.setCta()
 						.onClick(() => this.initiateLogin())
 				);
+
+			let codeInputValue = "";
+			new Setting(containerEl)
+				.setName("Connect with a code")
+				.setDesc(
+					"If the Log in button doesn't work, generate a code at speaknotes.io/settings/integrations and paste it here."
+				)
+				.addText((text) =>
+					text.setPlaceholder("ABCD2345").onChange((value) => {
+						codeInputValue = value.trim().toUpperCase();
+					})
+				)
+				.addButton((btn) =>
+					btn
+						.setButtonText("Connect")
+						.onClick(async () => {
+							await this.handleConnectWithCode(codeInputValue);
+						})
+				);
 		}
 
 		new Setting(containerEl).setName("Sync").setHeading();
@@ -209,6 +228,20 @@ export class SettingsTab extends PluginSettingTab {
 		window.open(`https://speaknotes.io/auth/obsidian?redirect=${encodeURIComponent(redirectUrl)}`);
 
 		new Notice("Opening login in your browser...");
+	}
+
+	async handleConnectWithCode(rawCode: string): Promise<void> {
+		const code = rawCode.trim().toUpperCase();
+		if (!code) {
+			new Notice("Enter a code first.");
+			return;
+		}
+		try {
+			const { token, userId, email } = await this.plugin.api.exchangeConnectCode(code);
+			await this.plugin.handleAuthCallback({ token, userId, email });
+		} catch (error) {
+			new Notice((error as Error).message || "Couldn't connect with that code.");
+		}
 	}
 
 	async handleDisconnect(): Promise<void> {

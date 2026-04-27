@@ -180,6 +180,28 @@ export class SpeakNotesAPI {
 		});
 	}
 
+	async exchangeConnectCode(
+		code: string
+	): Promise<{ token: string; userId: string; email: string }> {
+		const response = await requestUrl({
+			url: `${this.baseUrl}/integrations/obsidian/exchange-code`,
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ code }),
+			throw: false,
+		});
+		if (response.status === 404) {
+			throw new Error("Code not found. Generate a new code on speaknotes.io.");
+		}
+		if (response.status === 410) {
+			throw new Error("Code expired or already used. Generate a new code.");
+		}
+		if (response.status < 200 || response.status >= 300) {
+			throw new Error(`Failed to exchange code: ${response.status} ${response.text}`);
+		}
+		return response.json as { token: string; userId: string; email: string };
+	}
+
 	async getObsidianStatus(): Promise<{
 		connected: boolean;
 		settings?: {
