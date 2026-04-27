@@ -41,6 +41,13 @@ export class SpeakNotesAPI {
 		};
 
 		const response = await requestUrl(params);
+		if (response.status === 401 || response.status === 403) {
+			const err = new Error("Session expired. Please reconnect your account.") as Error & {
+				code?: string;
+			};
+			err.code = "AUTH_EXPIRED";
+			throw err;
+		}
 		if (response.status < 200 || response.status >= 300) {
 			throw new Error(`API Error: ${response.status} - ${response.text}`);
 		}

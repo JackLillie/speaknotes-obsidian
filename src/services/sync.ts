@@ -151,8 +151,13 @@ export class SyncService {
 			}
 		} catch (error) {
 			console.error("Sync failed:", error);
-			captureException(error, { stage: "sync", userId: this.settings.userId });
-			new Notice(`Sync failed - ${(error as Error).message}`);
+			const code = (error as { code?: string }).code;
+			if (code === "AUTH_EXPIRED") {
+				new Notice("Session expired. Please reconnect in plugin settings.");
+			} else {
+				captureException(error, { stage: "sync", userId: this.settings.userId });
+				new Notice(`Sync failed - ${(error as Error).message}`);
+			}
 		} finally {
 			this.isSyncing = false;
 		}
