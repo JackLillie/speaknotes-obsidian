@@ -32,7 +32,7 @@ export class RecorderModal extends Modal {
 		const { contentEl } = this;
 		contentEl.addClass("speaknotes-recorder-modal");
 
-		contentEl.createEl("h2", { text: "Record Voice Memo" });
+		contentEl.createEl("h2", { text: "Record voice memo" });
 
 		// Waveform display
 		this.waveform = contentEl.createEl("canvas", {

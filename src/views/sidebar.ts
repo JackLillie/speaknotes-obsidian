@@ -50,7 +50,7 @@ export class SidebarView extends ItemView {
 
 		// Header
 		const header = container.createDiv("speaknotes-sidebar-header");
-		header.createEl("h4", { text: "SpeakNotes Library" });
+		header.createEl("h4", { text: "SpeakNotes library" });
 
 		// Sync button
 		const syncBtn = header.createEl("button", {

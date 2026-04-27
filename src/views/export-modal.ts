@@ -45,7 +45,7 @@ export class ExportModal extends Modal {
 
 		// Preview
 		const previewContainer = container.createDiv("speaknotes-export-preview");
-		previewContainer.createEl("h4", { text: "Content Preview" });
+		previewContainer.createEl("h4", { text: "Content preview" });
 		const preview = previewContainer.createEl("div", {
 			cls: "speaknotes-export-preview-content",
 		});

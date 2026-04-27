@@ -27,7 +27,7 @@ export class BulkExportModal extends Modal {
 		const { contentEl } = this;
 		contentEl.addClass("speaknotes-bulk-export-modal");
 
-		contentEl.createEl("h2", { text: "Bulk Export Summaries" });
+		contentEl.createEl("h2", { text: "Bulk export summaries" });
 
 		// Loading state
 		const loadingEl = contentEl.createDiv("speaknotes-loading");
@@ -65,7 +65,7 @@ export class BulkExportModal extends Modal {
 		contentEl.empty();
 		contentEl.addClass("speaknotes-bulk-export-modal");
 
-		contentEl.createEl("h2", { text: "Bulk Export Summaries" });
+		contentEl.createEl("h2", { text: "Bulk export summaries" });
 
 		if (this.isLoading) {
 			contentEl.createDiv({

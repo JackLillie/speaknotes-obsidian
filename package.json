@@ -1,7 +1,7 @@
 {
 	"name": "speaknotes-obsidian",
-	"version": "1.0.0",
-	"description": "SpeakNotes integration for Obsidian - Transcribe and summarize audio directly in Obsidian",
+	"version": "1.0.1",
+	"description": "Transcribe and summarize audio and video into structured notes",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",

@@ -20,15 +20,12 @@ export class SettingsTab extends PluginSettingTab {
 		const { containerEl } = this;
 		containerEl.empty();
 
-		containerEl.createEl("h2", { text: "SpeakNotes Settings" });
-
-		// Connection section
-		containerEl.createEl("h3", { text: "Connection" });
+		new Setting(containerEl).setName("Connection").setHeading();
 
 		if (this.plugin.settings.userId) {
 			// Connected state
 			new Setting(containerEl)
-				.setName("Connected Account")
+				.setName("Connected account")
 				.setDesc(`Signed in as ${this.plugin.settings.userEmail || this.plugin.settings.userId}`)
 				.addButton((btn) =>
 					btn
@@ -43,10 +40,10 @@ export class SettingsTab extends PluginSettingTab {
 			if (this.plugin.settings.lastSyncTimestamp) {
 				const lastSync = new Date(this.plugin.settings.lastSyncTimestamp);
 				new Setting(containerEl)
-					.setName("Last Sync")
+					.setName("Last sync")
 					.setDesc(lastSync.toLocaleString())
 					.addButton((btn) =>
-						btn.setButtonText("Sync Now").onClick(async () => {
+						btn.setButtonText("Sync now").onClick(async () => {
 							await this.plugin.syncService.sync();
 							this.display(); // Refresh to show new timestamp
 						})
@@ -55,22 +52,21 @@ export class SettingsTab extends PluginSettingTab {
 		} else {
 			// Not connected state
 			new Setting(containerEl)
-				.setName("Connect Account")
+				.setName("Connect account")
 				.setDesc("Sign in with your SpeakNotes account to sync notes")
 				.addButton((btn) =>
 					btn
-						.setButtonText("Login with SpeakNotes")
+						.setButtonText("Log in with SpeakNotes")
 						.setCta()
 						.onClick(() => this.initiateLogin())
 				);
 		}
 
-		// Sync section
-		containerEl.createEl("h3", { text: "Sync Settings" });
+		new Setting(containerEl).setName("Sync").setHeading();
 
 		// Export folder
 		new Setting(containerEl)
-			.setName("Export Folder")
+			.setName("Export folder")
 			.setDesc("Folder in your vault where SpeakNotes will be saved")
 			.addText((text) =>
 				text
@@ -84,8 +80,8 @@ export class SettingsTab extends PluginSettingTab {
 
 		// Auto sync
 		new Setting(containerEl)
-			.setName("Auto Sync")
-			.setDesc("Automatically sync notes on startup")
+			.setName("Auto-sync on startup")
+			.setDesc("Automatically sync notes when Obsidian launches")
 			.addToggle((toggle) =>
 				toggle.setValue(this.plugin.settings.autoSync).onChange(async (value) => {
 					this.plugin.settings.autoSync = value;
@@ -95,7 +91,7 @@ export class SettingsTab extends PluginSettingTab {
 
 		// Sync interval
 		new Setting(containerEl)
-			.setName("Sync Interval")
+			.setName("Sync interval")
 			.setDesc("How often to sync in minutes (0 to disable periodic sync)")
 			.addSlider((slider) =>
 				slider
@@ -116,7 +112,7 @@ export class SettingsTab extends PluginSettingTab {
 
 		// Two-way sync
 		new Setting(containerEl)
-			.setName("Two-Way Sync")
+			.setName("Two-way sync")
 			.setDesc("Push local edits back to SpeakNotes when syncing (title and summary changes)")
 			.addToggle((toggle) =>
 				toggle.setValue(this.plugin.settings.enableTwoWaySync).onChange(async (value) => {
@@ -127,11 +123,11 @@ export class SettingsTab extends PluginSettingTab {
 
 		// Force refresh
 		new Setting(containerEl)
-			.setName("Force Refresh")
+			.setName("Force refresh")
 			.setDesc("Delete all local summaries and re-download everything from SpeakNotes")
 			.addButton((btn) =>
 				btn
-					.setButtonText("Force Refresh")
+					.setButtonText("Force refresh")
 					.setWarning()
 					.onClick(async () => {
 						const confirmed = await this.confirmForceRefresh();
@@ -141,12 +137,11 @@ export class SettingsTab extends PluginSettingTab {
 					})
 			);
 
-		// Content section
-		containerEl.createEl("h3", { text: "Content Settings" });
+		new Setting(containerEl).setName("Content").setHeading();
 
 		// Default format
 		new Setting(containerEl)
-			.setName("Default Summary Format")
+			.setName("Default summary format")
 			.setDesc("Default format for new recordings")
 			.addDropdown((dropdown) => {
 				for (const format of CONTENT_FORMATS) {
@@ -160,7 +155,7 @@ export class SettingsTab extends PluginSettingTab {
 
 		// Include transcription
 		new Setting(containerEl)
-			.setName("Include Full Transcription")
+			.setName("Include full transcription")
 			.setDesc("Include the full transcription in exported notes")
 			.addToggle((toggle) =>
 				toggle.setValue(this.plugin.settings.includeTranscription).onChange(async (value) => {
@@ -171,7 +166,7 @@ export class SettingsTab extends PluginSettingTab {
 
 		// Custom template
 		new Setting(containerEl)
-			.setName("Export Template")
+			.setName("Export template")
 			.setDesc(
 				"Custom Markdown template. Available variables: {{id}}, {{title}}, {{created}}, {{updated}}, {{type}}, {{status}}, {{format}}, {{isPinned}}, {{summary}}, {{transcription}}"
 			)
@@ -187,14 +182,13 @@ export class SettingsTab extends PluginSettingTab {
 					});
 			});
 
-		// About section
-		containerEl.createEl("h3", { text: "About" });
+		new Setting(containerEl).setName("About").setHeading();
 
 		new Setting(containerEl)
-			.setName("SpeakNotes for Obsidian")
-			.setDesc("Version 1.0.0")
+			.setName("Version")
+			.setDesc("1.0.1")
 			.addButton((btn) =>
-				btn.setButtonText("Visit Website").onClick(() => {
+				btn.setButtonText("Visit website").onClick(() => {
 					window.open("https://speaknotes.io");
 				})
 			);
@@ -235,7 +229,7 @@ export class SettingsTab extends PluginSettingTab {
 		return new Promise((resolve) => {
 			const modal = new ConfirmModal(
 				this.app,
-				"Force Refresh",
+				"Force refresh",
 				"This will delete all local SpeakNotes summaries and re-download them from the server. Any local changes that haven't been synced will be lost.\n\nAre you sure?",
 				() => resolve(true),
 				() => resolve(false)
@@ -321,7 +315,7 @@ class ConfirmModal extends Modal {
 		};
 
 		const confirmBtn = buttonContainer.createEl("button", {
-			text: "Force Refresh",
+			text: "Force refresh",
 			cls: "mod-warning",
 		});
 		confirmBtn.onclick = () => {
