@@ -141,17 +141,19 @@ export class StatusBarManager {
 	 * SVG Icons - built via DOM API (Obsidian rejects innerHTML)
 	 */
 	private buildSvg(host: HTMLElement, builder: (svg: SVGElement) => void): void {
-		const svg = activeDocument.createSvg("svg");
-		svg.setAttribute("width", "14");
-		svg.setAttribute("height", "14");
-		svg.setAttribute("viewBox", "0 0 24 24");
-		svg.setAttribute("fill", "none");
-		svg.setAttribute("stroke", "currentColor");
-		svg.setAttribute("stroke-width", "2");
-		svg.setAttribute("stroke-linecap", "round");
-		svg.setAttribute("stroke-linejoin", "round");
+		const svg = host.createSvg("svg", {
+			attr: {
+				width: "14",
+				height: "14",
+				viewBox: "0 0 24 24",
+				fill: "none",
+				stroke: "currentColor",
+				"stroke-width": "2",
+				"stroke-linecap": "round",
+				"stroke-linejoin": "round",
+			},
+		});
 		builder(svg);
-		host.appendChild(svg);
 	}
 
 	private appendSvgChild(
@@ -159,9 +161,7 @@ export class StatusBarManager {
 		tag: keyof SVGElementTagNameMap,
 		attrs: Record<string, string>
 	): void {
-		const el = activeDocument.createSvg(tag);
-		for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
-		parent.appendChild(el);
+		parent.createSvg(tag, { attr: attrs });
 	}
 
 	renderIdleIcon(host: HTMLElement): void {
