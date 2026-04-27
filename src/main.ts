@@ -3,7 +3,7 @@
  * Main entry point
  */
 
-import { Plugin, TFile, MarkdownView } from "obsidian";
+import { Notice, Plugin, TFile, MarkdownView } from "obsidian";
 import { SpeakNotesAPI } from "./api/client";
 import { SidebarView, VIEW_TYPE_SIDEBAR } from "./views/sidebar";
 import { RecorderModal } from "./views/recorder";
@@ -19,6 +19,7 @@ export default class SpeakNotesPlugin extends Plugin {
 	api!: SpeakNotesAPI;
 	syncService!: SyncService;
 	statusBarManager!: StatusBarManager;
+	settingsTab!: SettingsTab;
 
 	async onload(): Promise<void> {
 		await this.loadSettings();
@@ -137,7 +138,8 @@ export default class SpeakNotesPlugin extends Plugin {
 		);
 
 		// Settings tab
-		this.addSettingTab(new SettingsTab(this.app, this));
+		this.settingsTab = new SettingsTab(this.app, this);
+		this.addSettingTab(this.settingsTab);
 
 		// Register protocol handler for OAuth callback
 		this.registerObsidianProtocolHandler("speaknotes-auth-callback", async (params) => {
@@ -265,8 +267,10 @@ export default class SpeakNotesPlugin extends Plugin {
 				this.syncService.startPeriodicSync();
 			}
 
+			// Refresh settings tab so it reflects the connected state
+			this.settingsTab.display();
+
 			// Show success notification
-			const { Notice } = await import("obsidian");
 			new Notice("SpeakNotes: Successfully connected!");
 		}
 	}
