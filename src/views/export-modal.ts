@@ -213,12 +213,14 @@ export class ExportModal extends Modal {
 					title,
 					format,
 					source: "obsidian-plugin",
+					fileName: file.name,
 				});
 			} else if (this.isVideoFile(file)) {
 				result = await this.plugin.api.uploadVideo(blob, {
 					title,
 					format,
 					source: "obsidian-plugin",
+					fileName: file.name,
 				});
 			} else {
 				throw new Error("Unsupported file type");

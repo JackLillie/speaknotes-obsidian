@@ -18,6 +18,45 @@ interface JsonRequestOptions {
 	headers?: Record<string, string>;
 }
 
+interface UploadUrlResponse {
+	uploadUrl: string;
+	noteId: string;
+	orgId?: string;
+	contentType?: string;
+}
+
+const MIME_EXTENSIONS: Record<string, string> = {
+	"audio/webm": "webm",
+	"audio/mp4": "m4a",
+	"audio/mpeg": "mp3",
+	"audio/mp3": "mp3",
+	"audio/ogg": "ogg",
+	"audio/wav": "wav",
+	"audio/x-wav": "wav",
+	"audio/aac": "aac",
+	"audio/flac": "flac",
+	"video/webm": "webm",
+	"video/mp4": "mp4",
+	"video/quicktime": "mov",
+	"video/x-matroska": "mkv",
+	"video/x-msvideo": "avi",
+};
+
+function extensionFromMime(contentType: string): string {
+	const mime = contentType.split(";")[0]?.trim().toLowerCase() ?? "";
+	return MIME_EXTENSIONS[mime] ?? "webm";
+}
+
+function fileNameFromTitle(title: string, contentType: string): string {
+	const ext = extensionFromMime(contentType);
+	const base = title
+		.replace(/[\\/:*?"<>|]+/g, "-")
+		.replace(/\s+/g, " ")
+		.trim()
+		.slice(0, 180);
+	return `${base || "recording"}.${ext}`;
+}
+
 export class SpeakNotesAPI {
 	private baseUrl: string;
 	private token: string;
@@ -54,73 +93,59 @@ export class SpeakNotesAPI {
 		return response.json as T;
 	}
 
-	private async uploadMultipart<T>(
-		endpoint: string,
-		fileField: string,
-		fileName: string,
-		fileBlob: Blob,
-		fields: Record<string, string>
-	): Promise<T> {
-		const boundary = `----SpeakNotesBoundary${Math.random().toString(36).slice(2)}`;
-		const encoder = new TextEncoder();
-		const parts: Uint8Array[] = [];
-		const fileBuffer = new Uint8Array(await fileBlob.arrayBuffer());
-
-		for (const [key, value] of Object.entries(fields)) {
-			parts.push(
-				encoder.encode(
-					`--${boundary}\r\nContent-Disposition: form-data; name="${key}"\r\n\r\n${value}\r\n`
-				)
-			);
-		}
-		const fileType = fileBlob.type || "application/octet-stream";
-		parts.push(
-			encoder.encode(
-				`--${boundary}\r\nContent-Disposition: form-data; name="${fileField}"; filename="${fileName}"\r\nContent-Type: ${fileType}\r\n\r\n`
-			)
-		);
-		parts.push(fileBuffer);
-		parts.push(encoder.encode(`\r\n--${boundary}--\r\n`));
-
-		const total = parts.reduce((acc, p) => acc + p.byteLength, 0);
-		const body = new Uint8Array(total);
-		let offset = 0;
-		for (const p of parts) {
-			body.set(p, offset);
-			offset += p.byteLength;
-		}
-
-		const response = await requestUrl({
-			url: `${this.baseUrl}${endpoint}`,
-			method: "POST",
-			headers: {
-				Authorization: `Bearer ${this.token}`,
-				"Content-Type": `multipart/form-data; boundary=${boundary}`,
-			},
-			body: body.buffer,
-			throw: false,
-		});
-
-		if (response.status < 200 || response.status >= 300) {
-			throw new Error(`Upload failed: ${response.status} - ${response.text}`);
-		}
-		return response.json as T;
-	}
-
 	async uploadAudio(audioBlob: Blob, options: UploadOptions): Promise<UploadResponse> {
-		return this.uploadMultipart("/upload-audio", "audio", "recording.webm", audioBlob, {
-			title: options.title,
-			style: options.format,
-			source: options.source,
-		});
+		return this.uploadMedia(audioBlob, options);
 	}
 
 	async uploadVideo(videoBlob: Blob, options: UploadOptions): Promise<UploadResponse> {
-		return this.uploadMultipart("/upload-video", "video", "recording.webm", videoBlob, {
-			title: options.title,
-			style: options.format,
-			source: options.source,
+		return this.uploadMedia(videoBlob, options);
+	}
+
+	private async uploadMedia(fileBlob: Blob, options: UploadOptions): Promise<UploadResponse> {
+		const contentType = fileBlob.type || "application/octet-stream";
+		const fileName = options.fileName || fileNameFromTitle(options.title, contentType);
+
+		const initiated = await this.request<UploadUrlResponse>("/upload-url", {
+			method: "POST",
+			body: JSON.stringify({
+				fileName,
+				contentType,
+				fileSize: fileBlob.size,
+				style: options.format,
+				styleId: options.format,
+			}),
 		});
+
+		if (!initiated.uploadUrl || !initiated.noteId) {
+			throw new Error("Failed to get upload URL");
+		}
+
+		const putType = initiated.contentType || contentType;
+		const putResponse = await requestUrl({
+			url: initiated.uploadUrl,
+			method: "PUT",
+			headers: {
+				"Content-Type": putType,
+			},
+			body: await fileBlob.arrayBuffer(),
+			throw: false,
+		});
+		if (putResponse.status < 200 || putResponse.status >= 300) {
+			throw new Error(`Upload failed: ${putResponse.status} - ${putResponse.text}`);
+		}
+
+		await this.request("/upload-complete", {
+			method: "POST",
+			body: JSON.stringify({
+				noteId: initiated.noteId,
+				orgId: initiated.orgId,
+			}),
+		});
+
+		return {
+			noteId: initiated.noteId,
+			status: "Uploading",
+		};
 	}
 
 	async updateStyle(

@@ -1,6 +1,6 @@
 {
 	"name": "speaknotes-obsidian",
-	"version": "1.0.10",
+	"version": "1.0.11",
 	"description": "Transcribe and summarize audio and video into structured notes",
 	"main": "main.js",
 	"scripts": {

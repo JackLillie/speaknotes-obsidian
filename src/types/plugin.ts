@@ -52,6 +52,7 @@ export interface UploadOptions {
 	title: string;
 	format: ContentFormat;
 	source: "obsidian-plugin";
+	fileName?: string;
 }
 
 /**
