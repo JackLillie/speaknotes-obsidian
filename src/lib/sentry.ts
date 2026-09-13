@@ -11,6 +11,25 @@ const DSN =
 
 let scope: Scope | null = null;
 
+/**
+ * Expected "please connect / reconnect" UX — not product bugs.
+ * Matches the recorder not-authenticated throw, sync "Not connected"
+ * notice, and API AUTH_EXPIRED / session-expired reconnect prompts.
+ */
+const EXPECTED_AUTH_ERROR =
+	/not (?:authenticated|connected)|please (?:re)?connect|session expired/i;
+
+function isExpectedAuthError(error: unknown): boolean {
+	if (error && typeof error === "object" && "code" in error) {
+		if ((error as { code?: string }).code === "AUTH_EXPIRED") {
+			return true;
+		}
+	}
+	const message =
+		error instanceof Error ? error.message : typeof error === "string" ? error : "";
+	return EXPECTED_AUTH_ERROR.test(message);
+}
+
 export function initSentry(release: string): void {
 	if (scope) return;
 
@@ -51,6 +70,9 @@ export function captureException(
 	error: unknown,
 	context?: Record<string, unknown>
 ): void {
+	if (isExpectedAuthError(error)) {
+		return;
+	}
 	if (!scope) {
 		console.error("[speaknotes] sentry not initialised:", error);
 		return;
