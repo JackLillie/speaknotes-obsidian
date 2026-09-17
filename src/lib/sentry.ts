@@ -19,7 +19,14 @@ let scope: Scope | null = null;
 const EXPECTED_AUTH_ERROR =
 	/not (?:authenticated|connected)|please (?:re)?connect|session expired/i;
 
-function isExpectedAuthError(error: unknown): boolean {
+/**
+ * Expected transcription wait UX — not product bugs.
+ * Matches waitForCompletion timeout (5 min) and note.status === "Error".
+ */
+const EXPECTED_TRANSCRIPTION_ERROR =
+	/timeout waiting for transcription|transcription failed/i;
+
+function isExpectedError(error: unknown): boolean {
 	if (error && typeof error === "object" && "code" in error) {
 		if ((error as { code?: string }).code === "AUTH_EXPIRED") {
 			return true;
@@ -27,7 +34,7 @@ function isExpectedAuthError(error: unknown): boolean {
 	}
 	const message =
 		error instanceof Error ? error.message : typeof error === "string" ? error : "";
-	return EXPECTED_AUTH_ERROR.test(message);
+	return EXPECTED_AUTH_ERROR.test(message) || EXPECTED_TRANSCRIPTION_ERROR.test(message);
 }
 
 export function initSentry(release: string): void {
@@ -70,7 +77,7 @@ export function captureException(
 	error: unknown,
 	context?: Record<string, unknown>
 ): void {
-	if (isExpectedAuthError(error)) {
+	if (isExpectedError(error)) {
 		return;
 	}
 	if (!scope) {
